@@ -9,19 +9,23 @@
 /* Begin PBXBuildFile section */
 		E81E35F329EDBC93007514B9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E81E35F229EDBC93007514B9 /* AppDelegate.swift */; };
 		E81E35F529EDBC93007514B9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E81E35F429EDBC93007514B9 /* SceneDelegate.swift */; };
-		E81E35F729EDBC93007514B9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E81E35F629EDBC93007514B9 /* ViewController.swift */; };
 		E81E35FC29EDBC94007514B9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E81E35FB29EDBC94007514B9 /* Assets.xcassets */; };
 		E81E35FF29EDBC94007514B9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E81E35FD29EDBC94007514B9 /* LaunchScreen.storyboard */; };
+		E81E360A29EDC73F007514B9 /* BBHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E81E360929EDC73F007514B9 /* BBHomeViewController.swift */; };
+		E81E360C29EDC75B007514B9 /* BBProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E81E360B29EDC75B007514B9 /* BBProfileViewController.swift */; };
+		E81E360E29EDC7AA007514B9 /* BBTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E81E360D29EDC7AA007514B9 /* BBTabBarController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		E81E35EF29EDBC93007514B9 /* BodyBlaze.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BodyBlaze.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E81E35F229EDBC93007514B9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E81E35F429EDBC93007514B9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		E81E35F629EDBC93007514B9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		E81E35FB29EDBC94007514B9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E81E35FE29EDBC94007514B9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E81E360029EDBC94007514B9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E81E360929EDC73F007514B9 /* BBHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBHomeViewController.swift; sourceTree = "<group>"; };
+		E81E360B29EDC75B007514B9 /* BBProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBProfileViewController.swift; sourceTree = "<group>"; };
+		E81E360D29EDC7AA007514B9 /* BBTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBTabBarController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,9 +79,19 @@
 		E81E360729EDBE2C007514B9 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				E81E35F629EDBC93007514B9 /* ViewController.swift */,
+				E81E360829EDC725007514B9 /* Core */,
+				E81E360D29EDC7AA007514B9 /* BBTabBarController.swift */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		E81E360829EDC725007514B9 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				E81E360929EDC73F007514B9 /* BBHomeViewController.swift */,
+				E81E360B29EDC75B007514B9 /* BBProfileViewController.swift */,
+			);
+			path = Core;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -150,9 +164,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E81E35F729EDBC93007514B9 /* ViewController.swift in Sources */,
+				E81E360C29EDC75B007514B9 /* BBProfileViewController.swift in Sources */,
+				E81E360A29EDC73F007514B9 /* BBHomeViewController.swift in Sources */,
 				E81E35F329EDBC93007514B9 /* AppDelegate.swift in Sources */,
 				E81E35F529EDBC93007514B9 /* SceneDelegate.swift in Sources */,
+				E81E360E29EDC7AA007514B9 /* BBTabBarController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

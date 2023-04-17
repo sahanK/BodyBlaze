@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  BBProfileViewController.swift
 //  BodyBlaze
 //
 //  Created by Sahan Walpita on 2023-04-17.
@@ -7,11 +7,9 @@
 
 import UIKit
 
-class ViewController: UIViewController {
-    
+final class BBProfileViewController: UIViewController {
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .blue
     }
 }
-
