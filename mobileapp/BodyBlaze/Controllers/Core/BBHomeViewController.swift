@@ -13,7 +13,7 @@ final class BBHomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = UIColor(named: "GrayScale-100")
         view.addSubViews(homeView)
         addConstraints()
     }

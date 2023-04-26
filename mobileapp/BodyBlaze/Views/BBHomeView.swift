@@ -9,11 +9,13 @@ import UIKit
 
 final class BBHomeView: UIView {
     private let workoutsList = BBWorkoutPlanListView()
+    private let customWorkoutList = BBCustomWorkoutPlanListView()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         translatesAutoresizingMaskIntoConstraints = false
-        addSubViews(workoutsList)
+        backgroundColor =  UIColor(named: "GrayScale-100")
+        addSubViews(workoutsList, customWorkoutList)
         addConstraints()
     }
     
@@ -23,10 +25,15 @@ final class BBHomeView: UIView {
     
     private func addConstraints() {
         NSLayoutConstraint.activate([
-            workoutsList.topAnchor.constraint(equalTo: topAnchor),
+            customWorkoutList.topAnchor.constraint(equalTo: topAnchor, constant: 20),
+            customWorkoutList.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
+            customWorkoutList.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
+            customWorkoutList.heightAnchor.constraint(equalToConstant: 320),
+            
+            workoutsList.topAnchor.constraint(equalTo: customWorkoutList.bottomAnchor, constant: 10),
             workoutsList.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
             workoutsList.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
-            workoutsList.bottomAnchor.constraint(equalTo: bottomAnchor)
+            workoutsList.bottomAnchor.constraint(equalTo: bottomAnchor),
         ])
     }
 }

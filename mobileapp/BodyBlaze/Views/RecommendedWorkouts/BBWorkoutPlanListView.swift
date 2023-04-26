@@ -42,6 +42,7 @@ final class BBWorkoutPlanListView: UIView {
         )
         tableView.showsVerticalScrollIndicator = false
         tableView.separatorStyle = .none
+        tableView.backgroundColor = UIColor(named: "GrayScale-100")
         return tableView
     }()
     

@@ -30,6 +30,7 @@ final class BBWorkoutPanListCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        backgroundColor = UIColor(named: "GrayScale-100")
         
         setupSubViews()
         contentView.addSubViews(containerVStack)
