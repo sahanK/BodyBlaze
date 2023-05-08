@@ -8,7 +8,7 @@
 import UIKit
 
 final class BBHomeView: UIView {
-    private let workoutsList = BBWorkoutPlanListView()
+    public let workoutsList = BBWorkoutPlanListView()
     private let customWorkoutList = BBCustomWorkoutPlanListView()
     
     override init(frame: CGRect) {

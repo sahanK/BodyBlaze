@@ -7,7 +7,16 @@
 
 import UIKit
 
+protocol BBWorkoutPlanListViewDelegate: AnyObject {
+    func bbWorkoutPlanListView(
+        _ workoutPlansListView: BBWorkoutPlanListView,
+        selectedPlan workoutPlan: BBWorkoutPlan
+    )
+}
+
 final class BBWorkoutPlanListView: UIView {
+    public weak var delegate: BBWorkoutPlanListViewDelegate?
+    
     private let viewModel = BBWorkoutPlanListViewViewModel()
     
     private let containerVStack: UIStackView = {
@@ -50,6 +59,7 @@ final class BBWorkoutPlanListView: UIView {
         super.init(frame: frame)
         translatesAutoresizingMaskIntoConstraints = false
         
+        viewModel.delegate = self
         setupTableView()
         setupSubViews()
         addSubViews(containerVStack)
@@ -86,5 +96,11 @@ final class BBWorkoutPlanListView: UIView {
             tableView.trailingAnchor.constraint(equalTo: containerVStack.trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: containerVStack.bottomAnchor),
         ])
+    }
+}
+
+extension BBWorkoutPlanListView: BBWorkoutPlanListViewModelDelegate {
+    func didSelectWorkoutPlan(_ workoutPlan: BBWorkoutPlan) {
+        delegate?.bbWorkoutPlanListView(self, selectedPlan: workoutPlan)
     }
 }
