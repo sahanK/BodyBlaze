@@ -21,7 +21,7 @@ final class BBWorkoutPanListCell: UITableViewCell {
     let bgImage: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.contentMode = .scaleToFill
+        imageView.contentMode = .scaleAspectFill
         imageView.layer.cornerRadius = 10
         imageView.layer.masksToBounds = true
         imageView.image = UIImage(named: "recommended-bg-1")
