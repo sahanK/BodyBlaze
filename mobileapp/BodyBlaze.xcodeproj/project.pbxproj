@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E80427C42A0BF7760014E621 /* BBWorkoutPlanPlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E80427C32A0BF7760014E621 /* BBWorkoutPlanPlayViewController.swift */; };
 		E80A3C8529F1B301002E7D50 /* BBCustomWorkoutPlanListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E80A3C8429F1B301002E7D50 /* BBCustomWorkoutPlanListView.swift */; };
 		E80A3C8729F1B5B7002E7D50 /* BBCustomWorkoutPlanListViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E80A3C8629F1B5B7002E7D50 /* BBCustomWorkoutPlanListViewViewModel.swift */; };
 		E80A3C8929F1BAAF002E7D50 /* BBCustomWorkoutPlanListViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E80A3C8829F1BAAF002E7D50 /* BBCustomWorkoutPlanListViewCell.swift */; };
@@ -32,6 +33,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E80427C32A0BF7760014E621 /* BBWorkoutPlanPlayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBWorkoutPlanPlayViewController.swift; sourceTree = "<group>"; };
 		E80A3C8429F1B301002E7D50 /* BBCustomWorkoutPlanListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBCustomWorkoutPlanListView.swift; sourceTree = "<group>"; };
 		E80A3C8629F1B5B7002E7D50 /* BBCustomWorkoutPlanListViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBCustomWorkoutPlanListViewViewModel.swift; sourceTree = "<group>"; };
 		E80A3C8829F1BAAF002E7D50 /* BBCustomWorkoutPlanListViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBCustomWorkoutPlanListViewCell.swift; sourceTree = "<group>"; };
@@ -152,6 +154,7 @@
 			isa = PBXGroup;
 			children = (
 				E8B33CBF2A09453D003A9977 /* BBWorkoutPlanDetailViewController.swift */,
+				E80427C32A0BF7760014E621 /* BBWorkoutPlanPlayViewController.swift */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -283,6 +286,7 @@
 				E8F26F9229EF189300DFFD53 /* BBWorkoutPlanListViewViewModel.swift in Sources */,
 				E8B33CCB2A094A2B003A9977 /* WorkoutPlans.swift in Sources */,
 				E81E35F329EDBC93007514B9 /* AppDelegate.swift in Sources */,
+				E80427C42A0BF7760014E621 /* BBWorkoutPlanPlayViewController.swift in Sources */,
 				E82EDAF629F06A3D00270C6D /* BBWorkoutPanListCell.swift in Sources */,
 				E81E35F529EDBC93007514B9 /* SceneDelegate.swift in Sources */,
 				E8B33CC62A094764003A9977 /* BBWorkout.swift in Sources */,

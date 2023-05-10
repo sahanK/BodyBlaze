@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 final class BBWorkoutPlanDetailViewViewModel: NSObject {
-    private let workoutPlan: BBWorkoutPlan
+    public let workoutPlan: BBWorkoutPlan
     
     init(workoutPlan: BBWorkoutPlan) {
         self.workoutPlan = workoutPlan

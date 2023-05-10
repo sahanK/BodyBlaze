@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class BBWorkoutPlanDetailViewController: UIViewController {
+final class BBWorkoutPlanDetailViewController: UIViewController, BBWorkoutPlanDetailViewDelegate {
     private var workoutPlanDetailView: BBWorkoutPlanDetailView
     
     init() {
@@ -24,6 +24,7 @@ final class BBWorkoutPlanDetailViewController: UIViewController {
         super.viewDidLoad()
     
         title = "Workout Plan"
+        workoutPlanDetailView.delegate = self
         view.addSubview(workoutPlanDetailView)
         addConstraints()
     }
@@ -35,5 +36,11 @@ final class BBWorkoutPlanDetailViewController: UIViewController {
             workoutPlanDetailView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor),
             workoutPlanDetailView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor),
         ])
+    }
+    
+    func bbWorkoutPlanDetailView(_ workoutPlanDetailView: BBWorkoutPlanDetailView, selectedPlan workoutPlan: BBWorkoutPlan) {
+        let playVC = BBWorkoutPlanPlayViewController()
+        playVC.navigationItem.largeTitleDisplayMode = .never
+        navigationController?.pushViewController(playVC, animated: true)
     }
 }

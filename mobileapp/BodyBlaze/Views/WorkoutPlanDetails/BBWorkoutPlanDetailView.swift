@@ -7,7 +7,16 @@
 
 import UIKit
 
+protocol BBWorkoutPlanDetailViewDelegate: AnyObject {
+    func bbWorkoutPlanDetailView(
+        _ workoutPlanDetailView: BBWorkoutPlanDetailView,
+        selectedPlan workoutPlan: BBWorkoutPlan
+    )
+}
+
 final class BBWorkoutPlanDetailView: UIView {
+    public weak var delegate: BBWorkoutPlanDetailViewDelegate?
+    
     private var viewModel: BBWorkoutPlanDetailViewViewModel
     
     private let imageView: UIImageView = {
@@ -99,10 +108,16 @@ final class BBWorkoutPlanDetailView: UIView {
             tableView
         )
         addConstraints()
+        
+        startButton.addTarget(self, action: #selector(startAction), for: .touchUpInside)
     }
     
     required init?(coder: NSCoder) {
         fatalError("init?(coder: NSCoder) is not implemented")
+    }
+    
+    @objc func startAction() {
+        delegate?.bbWorkoutPlanDetailView(self, selectedPlan: viewModel.workoutPlan)
     }
     
     private func addConstraints() {
