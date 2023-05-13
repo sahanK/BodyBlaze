@@ -139,6 +139,7 @@ final class BBWorkoutPlanPlayView: UIView {
         
         setupViews()
         addConstraints()
+        configure(viewModel: viewModel)
     }
     
     required init?(coder: NSCoder) {
@@ -229,5 +230,12 @@ final class BBWorkoutPlanPlayView: UIView {
             nextWorkoutRepsLabel.leftAnchor.constraint(equalTo: nextWorkoutImageView.rightAnchor, constant: 10),
             nextWorkoutRepsLabel.heightAnchor.constraint(equalToConstant: 20)
         ])
+    }
+    
+    private func configure(viewModel: BBWorkoutPlanPlayViewViewModel) {
+        nameLabel.text = viewModel.workoutPlan.workouts[0].name
+        repsLabel.text = "x\(viewModel.workoutPlan.workouts[0].reps)"
+        nextWorkoutNameLabel.text = viewModel.workoutPlan.workouts[1].name
+        nextWorkoutRepsLabel.text = "\(viewModel.workoutPlan.workouts[1].reps) reps"
     }
 }

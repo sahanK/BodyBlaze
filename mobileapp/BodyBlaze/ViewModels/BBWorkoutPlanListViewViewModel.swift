@@ -14,7 +14,25 @@ protocol BBWorkoutPlanListViewModelDelegate: AnyObject {
 final class BBWorkoutPlanListViewViewModel: NSObject {
     public weak var delegate: BBWorkoutPlanListViewModelDelegate?
     
-    private var workoutPlans: [BBWorkoutPlan] = workoutPlansData
+    private var workoutPlans: [BBWorkoutPlan] = [] {
+        didSet {
+            for workoutPlan in workoutPlans {
+                let viewModel = BBWorkoutPlanListViewCellViewModel(
+                    title: workoutPlan.name,
+                    numberOfWorkouts: workoutPlan.workouts.count,
+                    duration: workoutPlan.duration
+                )
+                
+                workoutPlanCellViewModels.append(viewModel)
+            }
+        }
+    }
+    
+    private var workoutPlanCellViewModels: [BBWorkoutPlanListViewCellViewModel] = []
+    
+    public func fetchWorkoutPlans() {
+        workoutPlans = workoutPlansData
+    }
 }
 
 extension BBWorkoutPlanListViewViewModel: UITableViewDataSource, UITableViewDelegate {
@@ -23,7 +41,13 @@ extension BBWorkoutPlanListViewViewModel: UITableViewDataSource, UITableViewDele
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: BBWorkoutPanListCell.identifier) as! BBWorkoutPanListCell
+        guard let cell = tableView.dequeueReusableCell(
+            withIdentifier: BBWorkoutPanListCell.identifier
+        ) as? BBWorkoutPanListCell else {
+            fatalError("Unsupported cell")
+        }
+        let viewModel = workoutPlanCellViewModels[indexPath.row]
+        cell.configure(with: viewModel)
         return cell
     }
     

@@ -99,6 +99,8 @@ final class BBWorkoutPlanDetailView: UIView {
         tableView.delegate = viewModel
         tableView.dataSource = viewModel
         
+        configure(with: viewModel)
+        
         addSubViews(
             imageView,
             descriptionLabel,
@@ -148,5 +150,12 @@ final class BBWorkoutPlanDetailView: UIView {
             tableView.rightAnchor.constraint(equalTo: rightAnchor, constant: -10),
             tableView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 10),
         ])
+    }
+    
+    private func configure(with viewModel: BBWorkoutPlanDetailViewViewModel) {
+//        imageView.image = UIImage(named: "")
+        descriptionLabel.text = viewModel.workoutPlan.description
+        numberOfWorkoutsLabel.text = "\(viewModel.workoutPlan.workouts.count) workouts"
+        durationLabel.text = "\(viewModel.workoutPlan.duration) weeks"
     }
 }

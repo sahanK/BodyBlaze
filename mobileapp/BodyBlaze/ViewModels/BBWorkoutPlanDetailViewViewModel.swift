@@ -18,14 +18,21 @@ final class BBWorkoutPlanDetailViewViewModel: NSObject {
 
 extension BBWorkoutPlanDetailViewViewModel: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 12
+        return workoutPlan.workouts.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(
+        guard let cell = tableView.dequeueReusableCell(
             withIdentifier: BBWorkoutCell.identifier,
             for: indexPath
-        ) as! BBWorkoutCell
+        ) as? BBWorkoutCell else {
+            fatalError("Unsupported cell")
+        }
+        let viewModel = BBWorkoutCellViewModel(
+            title: workoutPlan.workouts[indexPath.row].name,
+            numberOfReps: workoutPlan.workouts[indexPath.row].reps
+        )
+        cell.configure(with: viewModel)
         return cell
     }
     

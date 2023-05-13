@@ -8,6 +8,10 @@
 import Foundation
 
 final class BBWorkoutPlanPlayViewViewModel {
+    public let workoutPlan: BBWorkoutPlan
     
+    init(workoutPlan: BBWorkoutPlan) {
+        self.workoutPlan = workoutPlan
+    }
 }
 

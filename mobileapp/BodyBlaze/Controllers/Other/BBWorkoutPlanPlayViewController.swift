@@ -10,8 +10,10 @@ import UIKit
 final class BBWorkoutPlanPlayViewController: UIViewController {
     private let workoutPlanPlayView: BBWorkoutPlanPlayView
     
-    init() {
-        let viewModel = BBWorkoutPlanPlayViewViewModel()
+    private let viewModel: BBWorkoutPlanPlayViewViewModel
+    
+    init(viewModel: BBWorkoutPlanPlayViewViewModel) {
+        self.viewModel = viewModel
         self.workoutPlanPlayView = BBWorkoutPlanPlayView(frame: .zero, viewModel: viewModel)
         super.init(nibName: nil, bundle: nil)
     }

@@ -79,5 +79,10 @@ class BBWorkoutCell: UITableViewCell {
             repsLabel.heightAnchor.constraint(equalToConstant: 20)
         ])
     }
+    
+    public func configure(with viewModel: BBWorkoutCellViewModel) {
+        nameLabel.text = viewModel.title
+        repsLabel.text = "\(viewModel.numberOfReps) reps"
+    }
 
 }

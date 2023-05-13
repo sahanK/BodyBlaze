@@ -30,7 +30,8 @@ final class BBHomeViewController: UIViewController, BBWorkoutPlanListViewDelegat
     }
     
     func bbWorkoutPlanListView(_ workoutPlansListView: BBWorkoutPlanListView, selectedPlan workoutPlane: BBWorkoutPlan) {
-        let detailVC = BBWorkoutPlanDetailViewController()
+        let viewModel = BBWorkoutPlanDetailViewViewModel(workoutPlan: workoutPlane)
+        let detailVC = BBWorkoutPlanDetailViewController(viewModel: viewModel)
         detailVC.navigationItem.largeTitleDisplayMode = .never
         navigationController?.pushViewController(detailVC, animated: true)
     }

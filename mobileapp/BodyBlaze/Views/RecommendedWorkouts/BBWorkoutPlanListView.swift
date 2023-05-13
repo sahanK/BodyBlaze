@@ -59,11 +59,12 @@ final class BBWorkoutPlanListView: UIView {
         super.init(frame: frame)
         translatesAutoresizingMaskIntoConstraints = false
         
-        viewModel.delegate = self
-        setupTableView()
         setupSubViews()
         addSubViews(containerVStack)
         addConstraints()
+        viewModel.delegate = self
+        viewModel.fetchWorkoutPlans()
+        setupTableView()
     }
     
     required init?(coder: NSCoder) {

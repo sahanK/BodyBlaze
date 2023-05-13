@@ -8,10 +8,12 @@
 import UIKit
 
 final class BBWorkoutPlanDetailViewController: UIViewController, BBWorkoutPlanDetailViewDelegate {
+    private var viewModel: BBWorkoutPlanDetailViewViewModel
+    
     private var workoutPlanDetailView: BBWorkoutPlanDetailView
     
-    init() {
-        let viewModel = BBWorkoutPlanDetailViewViewModel(workoutPlan: workoutPlansData[0])
+    init(viewModel: BBWorkoutPlanDetailViewViewModel) {
+        self.viewModel = viewModel
         self.workoutPlanDetailView = BBWorkoutPlanDetailView(frame: .zero, viewModel: viewModel)
         super.init(nibName: nil, bundle: nil)
     }
@@ -39,7 +41,8 @@ final class BBWorkoutPlanDetailViewController: UIViewController, BBWorkoutPlanDe
     }
     
     func bbWorkoutPlanDetailView(_ workoutPlanDetailView: BBWorkoutPlanDetailView, selectedPlan workoutPlan: BBWorkoutPlan) {
-        let playVC = BBWorkoutPlanPlayViewController()
+        let viewModel = BBWorkoutPlanPlayViewViewModel(workoutPlan: workoutPlan)
+        let playVC = BBWorkoutPlanPlayViewController(viewModel: viewModel)
         playVC.navigationItem.largeTitleDisplayMode = .never
         navigationController?.pushViewController(playVC, animated: true)
     }

@@ -102,5 +102,11 @@ final class BBWorkoutPanListCell: UITableViewCell {
             numberOfWorkoutsLabel.heightAnchor.constraint(equalToConstant: 20),
         ])
     }
+    
+    public func configure(with viewModel: BBWorkoutPlanListViewCellViewModel) {
+        titleLabel.text = viewModel.title
+        numberOfWorkoutsLabel.text = "\(viewModel.numberOfWorkouts) workouts"
+        durationLabel.text = "\(viewModel.duration) weeks"
+    }
 
 }
