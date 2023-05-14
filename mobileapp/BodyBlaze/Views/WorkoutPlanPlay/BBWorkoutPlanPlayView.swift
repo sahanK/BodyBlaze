@@ -7,8 +7,14 @@
 
 import UIKit
 
+protocol BBWorkoutPlanPlayViewDelegate: AnyObject {
+    func goBack()
+}
+
 final class BBWorkoutPlanPlayView: UIView {
     private var viewModel: BBWorkoutPlanPlayViewViewModel
+    
+    public weak var delegate: BBWorkoutPlanPlayViewDelegate?
     
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -140,6 +146,10 @@ final class BBWorkoutPlanPlayView: UIView {
         setupViews()
         addConstraints()
         configure(viewModel: viewModel)
+        
+        nextButton.addTarget(self, action: #selector(nextButtonAction), for: .touchUpInside)
+        previousButton.addTarget(self, action: #selector(previousButtonAction), for: .touchUpInside)
+        finishButton.addTarget(self, action: #selector(finishButtonAction), for: .touchUpInside)
     }
     
     required init?(coder: NSCoder) {
@@ -164,6 +174,23 @@ final class BBWorkoutPlanPlayView: UIView {
             nextWorkoutLabel,
             nextWorkoutView
         )
+    }
+    
+    @objc
+    private func nextButtonAction() {
+        viewModel.setNextWorkout()
+        configure(viewModel: viewModel)
+    }
+    
+    @objc
+    private func previousButtonAction() {
+        viewModel.setPreviousWorkout()
+        configure(viewModel: viewModel)
+    }
+    
+    @objc
+    private func finishButtonAction() {
+        delegate?.goBack()
     }
     
     private func addConstraints() {
@@ -233,9 +260,19 @@ final class BBWorkoutPlanPlayView: UIView {
     }
     
     private func configure(viewModel: BBWorkoutPlanPlayViewViewModel) {
-        nameLabel.text = viewModel.workoutPlan.workouts[0].name
-        repsLabel.text = "x\(viewModel.workoutPlan.workouts[0].reps)"
-        nextWorkoutNameLabel.text = viewModel.workoutPlan.workouts[1].name
-        nextWorkoutRepsLabel.text = "\(viewModel.workoutPlan.workouts[1].reps) reps"
+        if viewModel.currentWorkout < viewModel.workoutPlan.workouts.count {
+            nameLabel.text = viewModel.workoutPlan.workouts[viewModel.currentWorkout].name
+            repsLabel.text = "x\(viewModel.workoutPlan.workouts[viewModel.currentWorkout].reps)"
+        }
+        
+        if viewModel.currentWorkout < viewModel.workoutPlan.workouts.count - 1 {
+            nextWorkoutLabel.isHidden = false
+            nextWorkoutView.isHidden = false
+            nextWorkoutNameLabel.text = viewModel.workoutPlan.workouts[viewModel.currentWorkout + 1].name
+            nextWorkoutRepsLabel.text = "\(viewModel.workoutPlan.workouts[viewModel.currentWorkout + 1].reps) reps"
+        } else {
+            nextWorkoutLabel.isHidden = true
+            nextWorkoutView.isHidden = true
+        }
     }
 }

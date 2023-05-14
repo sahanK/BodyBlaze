@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class BBWorkoutPlanPlayViewController: UIViewController {
+final class BBWorkoutPlanPlayViewController: UIViewController, BBWorkoutPlanPlayViewDelegate {
     private let workoutPlanPlayView: BBWorkoutPlanPlayView
     
     private let viewModel: BBWorkoutPlanPlayViewViewModel
@@ -16,6 +16,7 @@ final class BBWorkoutPlanPlayViewController: UIViewController {
         self.viewModel = viewModel
         self.workoutPlanPlayView = BBWorkoutPlanPlayView(frame: .zero, viewModel: viewModel)
         super.init(nibName: nil, bundle: nil)
+        self.workoutPlanPlayView.delegate = self
     }
     
     required init?(coder: NSCoder) {
@@ -37,5 +38,9 @@ final class BBWorkoutPlanPlayViewController: UIViewController {
             workoutPlanPlayView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor),
             workoutPlanPlayView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor),
         ])
+    }
+    
+    func goBack() {
+        navigationController?.popViewController(animated: true)
     }
 }
