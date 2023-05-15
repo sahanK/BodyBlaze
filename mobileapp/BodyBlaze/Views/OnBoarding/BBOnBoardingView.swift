@@ -10,14 +10,17 @@ import UIKit
 final class BBOnBoardingView: UIView {
     private let goalView = BBGoalView()
     private let genderView = BBGenderView()
+    private let physiqueView = BBPhysiqueView()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         translatesAutoresizingMaskIntoConstraints = false
         
-        addSubViews(goalView, genderView)
+        addSubViews(goalView, genderView, physiqueView)
         addConstraints()
-        goalView.isHidden = true
+        goalView.isHidden = false
+        genderView.isHidden = true
+        physiqueView.isHidden = true
     }
     
     required init?(coder: NSCoder) {
@@ -35,6 +38,11 @@ final class BBOnBoardingView: UIView {
             genderView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
             genderView.leftAnchor.constraint(equalTo: leftAnchor, constant: 10),
             genderView.rightAnchor.constraint(equalTo: rightAnchor, constant: -10),
+            
+            physiqueView.topAnchor.constraint(equalTo: topAnchor, constant: 10),
+            physiqueView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
+            physiqueView.leftAnchor.constraint(equalTo: leftAnchor, constant: 10),
+            physiqueView.rightAnchor.constraint(equalTo: rightAnchor, constant: -10),
         ])
     }
 }
