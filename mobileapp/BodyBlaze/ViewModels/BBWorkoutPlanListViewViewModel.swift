@@ -20,7 +20,8 @@ final class BBWorkoutPlanListViewViewModel: NSObject {
                 let viewModel = BBWorkoutPlanListViewCellViewModel(
                     title: workoutPlan.name,
                     numberOfWorkouts: workoutPlan.workouts.count,
-                    duration: workoutPlan.duration
+                    duration: workoutPlan.duration,
+                    imageUrl: "https://post.healthline.com/wp-content/uploads/2020/02/man-exercising-plank-push-up-1200x628-facebook.jpg"
                 )
                 
                 workoutPlanCellViewModels.append(viewModel)

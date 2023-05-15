@@ -16,7 +16,7 @@ final class BBWorkoutPanListCell: UITableViewCell {
         imageView.contentMode = .scaleAspectFill
         imageView.layer.cornerRadius = 10
         imageView.layer.masksToBounds = true
-        imageView.image = UIImage(named: "recommended-bg-1")
+        imageView.backgroundColor = .tertiarySystemBackground
         return imageView
     }()
     
@@ -107,6 +107,17 @@ final class BBWorkoutPanListCell: UITableViewCell {
         titleLabel.text = viewModel.title
         numberOfWorkoutsLabel.text = "\(viewModel.numberOfWorkouts) workouts"
         durationLabel.text = "\(viewModel.duration) weeks"
+        viewModel.fetchImage { [weak self] result in
+            switch result {
+            case .success(let data):
+                let image = UIImage(data: data)
+                DispatchQueue.main.async {
+                    self?.bgImage.image = image
+                }
+            case .failure(let error):
+                print(String(describing: error))
+            }
+        }
     }
 
 }
