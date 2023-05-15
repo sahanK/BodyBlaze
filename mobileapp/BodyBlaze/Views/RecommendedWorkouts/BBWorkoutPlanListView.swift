@@ -12,6 +12,7 @@ protocol BBWorkoutPlanListViewDelegate: AnyObject {
         _ workoutPlansListView: BBWorkoutPlanListView,
         selectedPlan workoutPlan: BBWorkoutPlan
     )
+    func goToCreateScreen()
 }
 
 final class BBWorkoutPlanListView: UIView {
@@ -31,6 +32,7 @@ final class BBWorkoutPlanListView: UIView {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .horizontal
+        stackView.distribution = .equalSpacing
         return stackView
     }()
     
@@ -40,6 +42,14 @@ final class BBWorkoutPlanListView: UIView {
         label.text = "Workout plans"
         label.font = .systemFont(ofSize: 20, weight: .medium)
         return label
+    }()
+    
+    private let createPlanButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("Create", for: .normal)
+        button.tintColor = UIColor(named: "Primary")
+        return button
     }()
     
     private let tableView: UITableView = {
@@ -65,10 +75,17 @@ final class BBWorkoutPlanListView: UIView {
         viewModel.delegate = self
         viewModel.fetchWorkoutPlans()
         setupTableView()
+        
+        createPlanButton.addTarget(self, action: #selector(createButtonAction), for: .touchUpInside)
     }
     
     required init?(coder: NSCoder) {
         fatalError("init?(coder: NSCoder) is not implemented")
+    }
+    
+    @objc
+    private func createButtonAction() {
+        delegate?.goToCreateScreen()
     }
     
     private func setupTableView() {
@@ -78,6 +95,7 @@ final class BBWorkoutPlanListView: UIView {
     
     private func setupSubViews() {
         titleHStack.addArrangedSubview(recommendedWorkoutsLabel)
+        titleHStack.addArrangedSubview(createPlanButton)
         containerVStack.addArrangedSubview(titleHStack)
         containerVStack.addArrangedSubview(tableView)
     }

@@ -8,7 +8,6 @@
 import UIKit
 
 final class BBHomeViewController: UIViewController, BBWorkoutPlanListViewDelegate {
-    
     private let homeView = BBHomeView()
 
     override func viewDidLoad() {
@@ -34,5 +33,11 @@ final class BBHomeViewController: UIViewController, BBWorkoutPlanListViewDelegat
         let detailVC = BBWorkoutPlanDetailViewController(viewModel: viewModel)
         detailVC.navigationItem.largeTitleDisplayMode = .never
         navigationController?.pushViewController(detailVC, animated: true)
+    }
+    
+    func goToCreateScreen() {
+        let createPlanVC = BBCreatePlanViewController()
+        createPlanVC.navigationItem.largeTitleDisplayMode = .never
+        navigationController?.pushViewController(createPlanVC, animated: true)
     }
 }
