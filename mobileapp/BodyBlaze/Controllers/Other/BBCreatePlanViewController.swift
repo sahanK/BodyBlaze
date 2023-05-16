@@ -7,7 +7,8 @@
 
 import UIKit
 
-class BBCreatePlanViewController: UIViewController {
+final class BBCreatePlanViewController: UIViewController, BBCreateWorkoutPlanViewDelegate {
+    
     private let createWorkoutPlanView = BBCreateWorkoutPlanView()
 
     override func viewDidLoad() {
@@ -16,6 +17,7 @@ class BBCreatePlanViewController: UIViewController {
         title = "Create workout plan"
         
         view.addSubViews(createWorkoutPlanView)
+        createWorkoutPlanView.delegate = self
         addConstraints()
     }
     
@@ -26,5 +28,11 @@ class BBCreatePlanViewController: UIViewController {
             createWorkoutPlanView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 10),
             createWorkoutPlanView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -10),
         ])
+    }
+    
+    func displayWorkoutsList() {
+        let workoutsVC = BBWorkoutListViewController()
+        workoutsVC.modalPresentationStyle = .pageSheet
+        present(workoutsVC, animated: true, completion: nil)
     }
 }
