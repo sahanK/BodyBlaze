@@ -45,10 +45,11 @@ final class BBCustomWorkoutPlanListView: UIView {
         translatesAutoresizingMaskIntoConstraints = false
         backgroundColor =  UIColor(named: "GrayScale-100")
         
-        setupCollectionView()
         setupSubViews()
         addSubViews(containerVStack)
         addConstraints()
+        viewModel.fetchWorkoutPlans()
+        setupCollectionView()
     }
     
     required init?(coder: NSCoder) {

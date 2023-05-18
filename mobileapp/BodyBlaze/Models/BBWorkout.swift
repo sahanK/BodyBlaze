@@ -8,11 +8,11 @@
 import Foundation
 
 struct BBWorkout: Codable {
-    let id: Int
-    let name: String
-    let reps: Int
-    let bodyParts: [String]
-    let time: Int
-    let image: String
-    let video: String
+    var _id: String
+    var name: String
+    var reps: Int
+    var bodyParts: [String]
+    var time: Int
+    var image: String
+    var video: String
 }

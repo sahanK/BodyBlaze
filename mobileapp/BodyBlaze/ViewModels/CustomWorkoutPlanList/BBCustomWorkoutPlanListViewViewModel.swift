@@ -8,19 +8,42 @@
 import UIKit
 
 final class BBCustomWorkoutPlanListViewViewModel: NSObject {
+    private var workoutPlans: [BBWorkoutPlan] = [] {
+        didSet {
+            for workoutPlan in workoutPlans {
+                let viewModel = BBWorkoutPlanListViewCellViewModel(
+                    title: workoutPlan.name,
+                    numberOfWorkouts: workoutPlan.workouts.count,
+                    duration: workoutPlan.duration,
+                    imageUrl: "https://post.healthline.com/wp-content/uploads/2020/02/man-exercising-plank-push-up-1200x628-facebook.jpg"
+                )
+                
+                workoutPlanCellViewModels.append(viewModel)
+            }
+        }
+    }
     
+    private var workoutPlanCellViewModels: [BBWorkoutPlanListViewCellViewModel] = []
+    
+    public func fetchWorkoutPlans() {
+        workoutPlans = BBFileManager.shared.readData(expecting: [BBWorkoutPlan].self)
+    }
 }
 
 extension BBCustomWorkoutPlanListViewViewModel: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 2
+        return workoutPlanCellViewModels.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(
+        guard let cell = collectionView.dequeueReusableCell(
             withReuseIdentifier: BBCustomWorkoutPlanListViewCell.identifier,
             for: indexPath
-        ) as! BBCustomWorkoutPlanListViewCell
+        ) as? BBCustomWorkoutPlanListViewCell else {
+            fatalError("Unsupported cell")
+        }
+        let viewModel = workoutPlanCellViewModels[indexPath.row]
+        cell.configure(with: viewModel)
         return cell
     }
     

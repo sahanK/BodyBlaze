@@ -8,8 +8,37 @@
 import Foundation
 import UIKit
 
+protocol BBCreateWorkoutPlanViewViewModelDelegate: AnyObject {
+    func didAddedWorkout()
+}
+
 final class BBCreateWorkoutPlanViewViewModel: NSObject {
+    public weak var delegate: BBCreateWorkoutPlanViewViewModelDelegate?
+    
     static let shared = BBCreateWorkoutPlanViewViewModel()
+    
+    public var selectedWorkouts: [BBWorkout] = [] {
+        didSet {
+            delegate?.didAddedWorkout()
+        }
+    }
+    public var selectedDuration: Int = 3
+    
+    public func createPlan(name: String) {
+        var currentPlans = BBFileManager.shared.readData(expecting: [BBWorkoutPlan].self)
+        currentPlans.append(
+            BBWorkoutPlan(
+                _id: UUID().uuidString,
+                name: name,
+                duration: selectedDuration,
+                workouts: selectedWorkouts
+            )
+        )
+        BBFileManager.shared.writeData(data: currentPlans)
+        selectedWorkouts = []
+        selectedDuration = 3
+        print("DEBUG:: data write successfull")
+    }
 }
 
 extension BBCreateWorkoutPlanViewViewModel: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
@@ -28,6 +57,9 @@ extension BBCreateWorkoutPlanViewViewModel: UICollectionViewDataSource, UICollec
         cell.layer.cornerRadius = 10
         let viewModel = BBPlanDurationCollectionViewCellViewModel(duration: indexPath.row + 1)
         cell.configure(with: viewModel)
+        if indexPath.row + 1 == selectedDuration {
+            cell.backgroundColor = UIColor(named: "Primary")
+        }
         return cell
     }
     
@@ -37,5 +69,40 @@ extension BBCreateWorkoutPlanViewViewModel: UICollectionViewDataSource, UICollec
             width: bounds.width * 0.2,
             height: bounds.width * 0.2
         )
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        collectionView.cellForItem(
+            at: IndexPath(
+                item: selectedDuration-1,
+                section: 0
+            ))?.backgroundColor = UIColor(named: "GrayScale-60")
+        collectionView.cellForItem(at: indexPath)?.backgroundColor = UIColor(named: "Primary")
+        selectedDuration = indexPath.row + 1
+    }
+}
+
+extension BBCreateWorkoutPlanViewViewModel: UITableViewDataSource, UITableViewDelegate {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        selectedWorkouts.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(
+            withIdentifier: BBWorkoutCell.identifier,
+            for: indexPath
+        ) as? BBWorkoutCell else {
+            fatalError("Unsupported cell")
+        }
+        let viewModel = BBWorkoutCellViewModel(
+            title: selectedWorkouts[indexPath.row].name,
+            numberOfReps: selectedWorkouts[indexPath.row].reps
+        )
+        cell.configure(with: viewModel)
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100.0
     }
 }

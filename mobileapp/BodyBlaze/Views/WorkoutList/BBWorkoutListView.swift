@@ -7,7 +7,13 @@
 
 import UIKit
 
+protocol BBWorkoutListViewDelegate: AnyObject {
+    func didSelectWorkout(_ workout: BBWorkout)
+}
+
 final class BBWorkoutListView: UIView {
+    public weak var delegate: BBWorkoutListViewDelegate?
+    
     private let viewModel = BBWorkoutListViewViewModel()
     
     private let workoutTableView: UITableView = {
@@ -30,6 +36,7 @@ final class BBWorkoutListView: UIView {
         addSubview(workoutTableView)
         addConstraints()
         setupTableView()
+        viewModel.delegate = self
     }
     
     required init?(coder: NSCoder) {
@@ -48,5 +55,11 @@ final class BBWorkoutListView: UIView {
             workoutTableView.leftAnchor.constraint(equalTo: leftAnchor),
             workoutTableView.rightAnchor.constraint(equalTo: rightAnchor),
         ])
+    }
+}
+
+extension BBWorkoutListView: BBWorkoutListViewViewModelDelegate {
+    func didSelectWorkout(_ workout: BBWorkout) {
+        delegate?.didSelectWorkout(workout)
     }
 }

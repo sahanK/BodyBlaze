@@ -8,10 +8,10 @@
 import Foundation
 
 struct BBWorkoutPlan: Codable {
-    let id: Int
-    let name: String
-    let description: String?
-    let image: String?
-    let duration: Int
-    let workouts: [BBWorkout]
+    var _id: String
+    var name: String
+    var description: String?
+    var image: String?
+    var duration: Int
+    var workouts: [BBWorkout]
 }

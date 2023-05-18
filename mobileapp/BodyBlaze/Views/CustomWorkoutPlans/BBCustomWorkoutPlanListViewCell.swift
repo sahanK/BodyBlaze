@@ -71,4 +71,20 @@ final class BBCustomWorkoutPlanListViewCell: UICollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
     }
+    
+    public func configure(with viewModel: BBWorkoutPlanListViewCellViewModel) {
+        nameLabel.text = viewModel.title
+        exercisesLabel.text = "\(viewModel.numberOfWorkouts) exercises"
+        viewModel.fetchImage { [weak self] result in
+            switch result {
+            case .success(let data):
+                let image = UIImage(data: data)
+                DispatchQueue.main.async {
+                    self?.workoutImageView.image = image
+                }
+            case .failure(let error):
+                print(String(describing: error))
+            }
+        }
+    }
 }

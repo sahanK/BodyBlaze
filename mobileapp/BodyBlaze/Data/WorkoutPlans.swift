@@ -9,14 +9,14 @@ import Foundation
 
 let workoutPlansData: [BBWorkoutPlan] = [
     BBWorkoutPlan(
-        id: 0,
+        _id: "WP_1",
         name: "Workout plan 1",
         description: "This is workout plan 1",
         image: "",
         duration: 2,
         workouts: [
             BBWorkout(
-                id: 0,
+                _id: "WK_1",
                 name: "Workout 1",
                 reps: 12,
                 bodyParts: ["Chest", "Arms", "Legs"],
@@ -25,7 +25,7 @@ let workoutPlansData: [BBWorkoutPlan] = [
                 video: ""
             ),
             BBWorkout(
-                id: 1,
+                _id: "WK_2",
                 name: "Workout 2",
                 reps: 12,
                 bodyParts: ["Chest", "Arms", "Legs"],
@@ -34,7 +34,7 @@ let workoutPlansData: [BBWorkoutPlan] = [
                 video: ""
             ),
             BBWorkout(
-                id: 2,
+                _id: "WK_3",
                 name: "Workout 3",
                 reps: 12,
                 bodyParts: ["Chest", "Arms", "Legs"],
@@ -45,14 +45,14 @@ let workoutPlansData: [BBWorkoutPlan] = [
         ]
     ),
     BBWorkoutPlan(
-        id: 1,
+        _id: "WP_2",
         name: "Workout plan 2",
         description: "This is workout plan 2",
         image: "",
         duration: 3,
         workouts: [
             BBWorkout(
-                id: 0,
+                _id: "WK_1",
                 name: "Workout 1",
                 reps: 12,
                 bodyParts: ["Chest", "Arms", "Legs"],
@@ -61,7 +61,7 @@ let workoutPlansData: [BBWorkoutPlan] = [
                 video: ""
             ),
             BBWorkout(
-                id: 1,
+                _id: "WK_2",
                 name: "Workout 2",
                 reps: 12,
                 bodyParts: ["Chest", "Arms", "Legs"],
@@ -70,7 +70,7 @@ let workoutPlansData: [BBWorkoutPlan] = [
                 video: ""
             ),
             BBWorkout(
-                id: 2,
+                _id: "WK_3",
                 name: "Workout 3",
                 reps: 12,
                 bodyParts: ["Chest", "Arms", "Legs"],

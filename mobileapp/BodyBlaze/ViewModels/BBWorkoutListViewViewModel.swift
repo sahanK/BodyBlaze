@@ -8,8 +8,13 @@
 import Foundation
 import UIKit
 
+protocol BBWorkoutListViewViewModelDelegate: AnyObject {
+    func didSelectWorkout(_ workout: BBWorkout)
+}
 
 final class BBWorkoutListViewViewModel: NSObject {
+    public weak var delegate: BBWorkoutListViewViewModelDelegate?
+    
     public let workouts = workoutsData
 }
 
@@ -35,5 +40,10 @@ extension BBWorkoutListViewViewModel: UITableViewDataSource, UITableViewDelegate
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100.0
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        delegate?.didSelectWorkout(workouts[indexPath.row])
     }
 }

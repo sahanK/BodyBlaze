@@ -89,7 +89,7 @@ final class BBCreateWorkoutPlanView: UIView {
     private let workoutsContainerView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = UIColor(named: "GrayScale-80")
+        view.backgroundColor = UIColor(named: "GrayScale-100")
         view.layer.cornerRadius = 10
         return view
     }()
@@ -111,6 +111,19 @@ final class BBCreateWorkoutPlanView: UIView {
         button.contentHorizontalAlignment = .center
         button.tintColor = UIColor(named: "Primary")
         return button
+    }()
+    
+    private let selectedWorkoutTableView: UITableView = {
+        let tableView = UITableView()
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.register(
+            BBWorkoutCell.self,
+            forCellReuseIdentifier: BBWorkoutCell.identifier
+        )
+        tableView.showsVerticalScrollIndicator = false
+        tableView.separatorStyle = .none
+        tableView.backgroundColor = UIColor(named: "GrayScale-100")
+        return tableView
     }()
     
     private let saveButton: UIButton = {
@@ -137,12 +150,17 @@ final class BBCreateWorkoutPlanView: UIView {
             workoutsContainerView,
             workoutsTitleLabel,
             addWorkoutsButton,
+            selectedWorkoutTableView,
             saveButton
         )
         addConstraints()
         setupCollectionView()
+        setupTableView()
         
         addWorkoutsButton.addTarget(self, action: #selector(addWorkoutsButtonAction), for: .touchUpInside)
+        saveButton.addTarget(self, action: #selector(saveButtonAction), for: .touchUpInside)
+        
+        viewModel.delegate = self
     }
     
     required init?(coder: NSCoder) {
@@ -154,9 +172,20 @@ final class BBCreateWorkoutPlanView: UIView {
         delegate?.displayWorkoutsList()
     }
     
+    @objc
+    private func saveButtonAction() {
+        guard let name = nameTextInput.text else { return }
+        viewModel.createPlan(name: name)
+    }
+    
     private func setupCollectionView() {
         durationCollectionView.delegate = viewModel
         durationCollectionView.dataSource = viewModel
+    }
+    
+    private func setupTableView() {
+        selectedWorkoutTableView.dataSource = viewModel
+        selectedWorkoutTableView.delegate = viewModel
     }
     
     private func addConstraints() {
@@ -208,10 +237,21 @@ final class BBCreateWorkoutPlanView: UIView {
             addWorkoutsButton.heightAnchor.constraint(equalToConstant: 30),
             addWorkoutsButton.widthAnchor.constraint(equalToConstant: 30),
             
+            selectedWorkoutTableView.topAnchor.constraint(equalTo: workoutsTitleLabel.bottomAnchor, constant: 5),
+            selectedWorkoutTableView.leftAnchor.constraint(equalTo: workoutsContainerView.leftAnchor, constant: 10),
+            selectedWorkoutTableView.rightAnchor.constraint(equalTo: workoutsContainerView.rightAnchor, constant: -10),
+            selectedWorkoutTableView.bottomAnchor.constraint(equalTo: workoutsContainerView.bottomAnchor, constant: -10),
+            
             saveButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 5),
             saveButton.leftAnchor.constraint(equalTo: leftAnchor),
             saveButton.rightAnchor.constraint(equalTo: rightAnchor),
             saveButton.heightAnchor.constraint(equalToConstant: 40)
         ])
+    }
+}
+
+extension BBCreateWorkoutPlanView: BBCreateWorkoutPlanViewViewModelDelegate {
+    func didAddedWorkout() {
+        selectedWorkoutTableView.reloadData()
     }
 }
