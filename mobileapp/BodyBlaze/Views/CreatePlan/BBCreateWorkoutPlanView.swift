@@ -9,6 +9,7 @@ import UIKit
 
 protocol BBCreateWorkoutPlanViewDelegate {
     func displayWorkoutsList()
+    func goBack()
 }
 
 final class BBCreateWorkoutPlanView: UIView {
@@ -176,6 +177,7 @@ final class BBCreateWorkoutPlanView: UIView {
     private func saveButtonAction() {
         guard let name = nameTextInput.text else { return }
         viewModel.createPlan(name: name)
+        delegate?.goBack()
     }
     
     private func setupCollectionView() {

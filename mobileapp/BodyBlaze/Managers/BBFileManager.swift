@@ -22,20 +22,23 @@ final class BBFileManager {
         try? JSONEncoder().encode(data).write(to: fileUrl)
     }
     
-    func readData<T: Codable>(expecting type: T.Type) -> T {
+    func readData<T: Codable>(expecting type: T.Type) -> T? {
         guard let fileUrl = try? FileManager.default.url(
             for: .documentDirectory,
             in: .userDomainMask,
             appropriateFor: nil,
             create: true
         ).appendingPathComponent("data.json") else {
-            fatalError("DEBUG:: fileUrl error")
+            print("DEBUG:: fileUrl error")
+            return nil
         }
         guard let data = try? Data(contentsOf: fileUrl) else {
-            fatalError("DEBUG:: file reading error")
+            print("DEBUG:: file reading error")
+            return nil
         }
         guard let decodedData = try? JSONDecoder().decode(type.self, from: data) else {
-            fatalError("DEBUG:: data decoding error")
+            print("DEBUG:: data decoding error")
+            return nil
         }
         return decodedData
     }

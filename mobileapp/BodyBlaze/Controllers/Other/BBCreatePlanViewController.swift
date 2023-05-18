@@ -35,4 +35,8 @@ final class BBCreatePlanViewController: UIViewController, BBCreateWorkoutPlanVie
         workoutsVC.modalPresentationStyle = .pageSheet
         present(workoutsVC, animated: true, completion: nil)
     }
+    
+    func goBack() {
+        navigationController?.popViewController(animated: true)
+    }
 }

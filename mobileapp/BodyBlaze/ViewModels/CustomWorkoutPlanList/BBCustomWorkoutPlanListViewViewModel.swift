@@ -7,7 +7,16 @@
 
 import UIKit
 
+protocol BBCustomWorkoutPlanListViewViewModelDelegate: AnyObject {
+    func newWorkoutCreated()
+    func displayInitialView(isEmptyList: Bool)
+}
+
 final class BBCustomWorkoutPlanListViewViewModel: NSObject {
+    public weak var delegate: BBCustomWorkoutPlanListViewViewModelDelegate?
+    
+    static let shared = BBCustomWorkoutPlanListViewViewModel()
+    
     private var workoutPlans: [BBWorkoutPlan] = [] {
         didSet {
             for workoutPlan in workoutPlans {
@@ -18,7 +27,9 @@ final class BBCustomWorkoutPlanListViewViewModel: NSObject {
                     imageUrl: "https://post.healthline.com/wp-content/uploads/2020/02/man-exercising-plank-push-up-1200x628-facebook.jpg"
                 )
                 
-                workoutPlanCellViewModels.append(viewModel)
+                if !workoutPlanCellViewModels.contains(viewModel) {
+                    workoutPlanCellViewModels.append(viewModel)
+                }
             }
         }
     }
@@ -26,7 +37,17 @@ final class BBCustomWorkoutPlanListViewViewModel: NSObject {
     private var workoutPlanCellViewModels: [BBWorkoutPlanListViewCellViewModel] = []
     
     public func fetchWorkoutPlans() {
-        workoutPlans = BBFileManager.shared.readData(expecting: [BBWorkoutPlan].self)
+        guard let customPlans = BBFileManager.shared.readData(expecting: [BBWorkoutPlan].self) else {
+            delegate?.displayInitialView(isEmptyList: true)
+            return
+        }
+        workoutPlans = customPlans
+        delegate?.displayInitialView(isEmptyList: false)
+    }
+    
+    public func addNewWorkoutPlan(_ newPlan: BBWorkoutPlan) {
+        workoutPlans.append(newPlan)
+        delegate?.newWorkoutCreated()
     }
 }
 
