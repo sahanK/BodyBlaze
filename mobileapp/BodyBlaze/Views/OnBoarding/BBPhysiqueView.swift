@@ -7,7 +7,13 @@
 
 import UIKit
 
+protocol BBPhysiqueViewDelegate: AnyObject {
+    func gotoHomeScreen()
+}
+
 class BBPhysiqueView: UIView {
+    public weak var delegate: BBPhysiqueViewDelegate?
+    
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -139,6 +145,13 @@ class BBPhysiqueView: UIView {
             nextButton
         )
         addConstraints()
+        
+        nextButton.addTarget(self, action: #selector(nextButtonAction), for: .touchUpInside)
+    }
+    
+    @objc
+    private func nextButtonAction() {
+        delegate?.gotoHomeScreen()
     }
     
     required init?(coder: NSCoder) {
@@ -160,7 +173,7 @@ class BBPhysiqueView: UIView {
             ageContainerView.topAnchor.constraint(equalTo: subTitleLabel.bottomAnchor, constant: 20),
             ageContainerView.leftAnchor.constraint(equalTo: leftAnchor),
             ageContainerView.rightAnchor.constraint(equalTo: rightAnchor),
-            ageContainerView.heightAnchor.constraint(equalToConstant: (UIScreen.main.bounds.height - 320) / 3),
+            ageContainerView.heightAnchor.constraint(equalToConstant: (UIScreen.main.bounds.height - 330) / 3),
             
             ageTitleLabel.topAnchor.constraint(equalTo: ageContainerView.topAnchor, constant: 10),
             ageTitleLabel.leftAnchor.constraint(equalTo: ageContainerView.leftAnchor, constant: 10),
@@ -173,7 +186,7 @@ class BBPhysiqueView: UIView {
             heightContainerView.topAnchor.constraint(equalTo: ageContainerView.bottomAnchor, constant: 10),
             heightContainerView.leftAnchor.constraint(equalTo: leftAnchor),
             heightContainerView.rightAnchor.constraint(equalTo: rightAnchor),
-            heightContainerView.heightAnchor.constraint(equalToConstant: (UIScreen.main.bounds.height - 320) / 3),
+            heightContainerView.heightAnchor.constraint(equalToConstant: (UIScreen.main.bounds.height - 330) / 3),
             
             heightTitleLabel.topAnchor.constraint(equalTo: heightContainerView.topAnchor, constant: 10),
             heightTitleLabel.leftAnchor.constraint(equalTo: heightContainerView.leftAnchor, constant: 10),
@@ -186,7 +199,7 @@ class BBPhysiqueView: UIView {
             weightContainerView.topAnchor.constraint(equalTo: heightContainerView.bottomAnchor, constant: 10),
             weightContainerView.leftAnchor.constraint(equalTo: leftAnchor),
             weightContainerView.rightAnchor.constraint(equalTo: rightAnchor),
-            weightContainerView.heightAnchor.constraint(equalToConstant: (UIScreen.main.bounds.height - 320) / 3),
+            weightContainerView.heightAnchor.constraint(equalToConstant: (UIScreen.main.bounds.height - 330) / 3),
             
             weightTitleLabel.topAnchor.constraint(equalTo: weightContainerView.topAnchor, constant: 10),
             weightTitleLabel.leftAnchor.constraint(equalTo: weightContainerView.leftAnchor, constant: 10),

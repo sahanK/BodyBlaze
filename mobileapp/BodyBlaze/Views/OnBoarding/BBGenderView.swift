@@ -7,7 +7,13 @@
 
 import UIKit
 
+protocol BBGenderViewDelegate: AnyObject {
+    func gotoPhysiqueView()
+}
+
 final class BBGenderView: UIView {
+    public weak var delegate: BBGenderViewDelegate?
+    
     private let viewModel: BBOnBoardingViewViewModel
     
     private let titleLabel: UILabel = {
@@ -72,6 +78,13 @@ final class BBGenderView: UIView {
             nextButton
         )
         addConstraints()
+        
+        nextButton.addTarget(self, action: #selector(nextButtonAction), for: .touchUpInside)
+    }
+    
+    @objc
+    private func nextButtonAction() {
+        delegate?.gotoPhysiqueView()
     }
     
     required init?(coder: NSCoder) {

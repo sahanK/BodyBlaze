@@ -18,7 +18,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let windowScene = (scene as? UIWindowScene) else { return }
         let mainWindow = UIWindow(windowScene: windowScene)
-        mainWindow.rootViewController = BBTabBarController()
+        let isDone = UserDefaults.standard.bool(forKey: "onBoardongDone")
+        var rootVC: UIViewController
+        if isDone {
+            rootVC = BBTabBarController()
+        } else {
+            rootVC = UINavigationController(rootViewController: BBGoalViewController())
+        }
+        mainWindow.rootViewController = rootVC
         mainWindow.makeKeyAndVisible()
         self.window = mainWindow
     }
