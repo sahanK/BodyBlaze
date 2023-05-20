@@ -37,7 +37,10 @@ final class BBCustomWorkoutPlanListViewViewModel: NSObject {
     private var workoutPlanCellViewModels: [BBWorkoutPlanListViewCellViewModel] = []
     
     public func fetchWorkoutPlans() {
-        guard let customPlans = BBFileManager.shared.readData(expecting: [BBWorkoutPlan].self) else {
+        guard let customPlans = BBFileManager.shared.readData(
+            expecting: [BBWorkoutPlan].self,
+            fileName: CUSTOM_PLANS_DATA_FILE
+        ) else {
             delegate?.displayInitialView(isEmptyList: true)
             return
         }

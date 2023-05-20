@@ -10,25 +10,25 @@ import Foundation
 final class BBFileManager {
     static let shared = BBFileManager()
     
-    func writeData(data: Encodable) {
+    func writeData(data: Encodable, fileName: String) {
         guard let fileUrl = try? FileManager.default.url(
             for: .documentDirectory,
             in: .userDomainMask,
             appropriateFor: nil,
             create: true
-        ).appendingPathComponent("data.json") else {
+        ).appendingPathComponent(fileName) else {
             fatalError("DEBUG:: fileUrl error")
         }
         try? JSONEncoder().encode(data).write(to: fileUrl)
     }
     
-    func readData<T: Codable>(expecting type: T.Type) -> T? {
+    func readData<T: Codable>(expecting type: T.Type, fileName: String) -> T? {
         guard let fileUrl = try? FileManager.default.url(
             for: .documentDirectory,
             in: .userDomainMask,
             appropriateFor: nil,
             create: true
-        ).appendingPathComponent("data.json") else {
+        ).appendingPathComponent(fileName) else {
             print("DEBUG:: fileUrl error")
             return nil
         }

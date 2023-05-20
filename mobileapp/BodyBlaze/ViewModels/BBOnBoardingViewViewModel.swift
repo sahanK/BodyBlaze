@@ -55,9 +55,23 @@ final class BBOnBoardingViewViewModel {
             delegate?.displayAlert(message: "Please enter a realistic weight to proceed. Thank you!")
             return false
         }
+        guard let gender = selectedGender else { return false }
+        guard let goal = selectedGoal else { return false }
+        
         age = Int(inputAge)
         height = Double(inputHeight)
         weight = Double(inputWeight)
+        
+        let profile = BBProfile(
+            gender: gender,
+            age: ageNumber,
+            height: heightNumber,
+            weight: weightNumber,
+            goal: goal
+        )
+        
+        BBFileManager.shared.writeData(data: profile, fileName: PROFILE_DATA_FILE)
+        
         return true
     }
 }

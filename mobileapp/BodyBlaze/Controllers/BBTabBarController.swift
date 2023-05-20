@@ -28,6 +28,7 @@ final class BBTabBarController: UITabBarController {
         nav2.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "person"), tag: 2)
         
         nav1.navigationBar.isHidden = true
+        nav2.navigationBar.isHidden = true
         
         setViewControllers([nav1, nav2], animated: true)
     }

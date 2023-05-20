@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum BBGoal: String {
+enum BBGoal: String, Codable {
     case WeightLoss = "Weight Loss"
     case MuscleGain = "Muscle Gain"
 }

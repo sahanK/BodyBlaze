@@ -31,9 +31,12 @@ final class BBCreateWorkoutPlanViewViewModel: NSObject {
             duration: selectedDuration,
             workouts: selectedWorkouts
         )
-        guard var currentPlans = BBFileManager.shared.readData(expecting: [BBWorkoutPlan].self) else {
+        guard var currentPlans = BBFileManager.shared.readData(
+            expecting: [BBWorkoutPlan].self,
+            fileName: CUSTOM_PLANS_DATA_FILE
+        ) else {
             let newPlans = [newPlan]
-            BBFileManager.shared.writeData(data: newPlans)
+            BBFileManager.shared.writeData(data: newPlans, fileName: CUSTOM_PLANS_DATA_FILE)
             selectedWorkouts = []
             selectedDuration = 3
             print("DEBUG:: data write successfull")
@@ -41,7 +44,7 @@ final class BBCreateWorkoutPlanViewViewModel: NSObject {
             return
         }
         currentPlans.append(newPlan)
-        BBFileManager.shared.writeData(data: currentPlans)
+        BBFileManager.shared.writeData(data: currentPlans, fileName: CUSTOM_PLANS_DATA_FILE)
         selectedWorkouts = []
         selectedDuration = 3
         BBCustomWorkoutPlanListViewViewModel.shared.addNewWorkoutPlan(newPlan)

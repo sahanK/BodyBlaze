@@ -50,6 +50,12 @@
 		E8CE62E62A129FE800FA6D46 /* BBImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CE62E52A129FE800FA6D46 /* BBImageLoader.swift */; };
 		E8DEBCE52A18A49E00CDA8FF /* BBGoal.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8DEBCE42A18A49E00CDA8FF /* BBGoal.swift */; };
 		E8DEBCE72A18A4C600CDA8FF /* BBGender.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8DEBCE62A18A4C600CDA8FF /* BBGender.swift */; };
+		E8DEBCEA2A19024B00CDA8FF /* BBProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8DEBCE92A19024B00CDA8FF /* BBProfileView.swift */; };
+		E8DEBCED2A19185700CDA8FF /* BBConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8DEBCEC2A19185700CDA8FF /* BBConstants.swift */; };
+		E8DEBCEF2A19192900CDA8FF /* BBBMI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8DEBCEE2A19192900CDA8FF /* BBBMI.swift */; };
+		E8DEBCF12A1919AB00CDA8FF /* BBHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8DEBCF02A1919AB00CDA8FF /* BBHelpers.swift */; };
+		E8DEBCF32A191BCC00CDA8FF /* BBProfileViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8DEBCF22A191BCC00CDA8FF /* BBProfileViewViewModel.swift */; };
+		E8DEBCF52A191D5200CDA8FF /* BBProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8DEBCF42A191D5200CDA8FF /* BBProfile.swift */; };
 		E8F26F8829EF105A00DFFD53 /* BBWorkoutPlanListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8F26F8729EF105A00DFFD53 /* BBWorkoutPlanListView.swift */; };
 		E8F26F8C29EF129900DFFD53 /* BBHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8F26F8B29EF129900DFFD53 /* BBHomeView.swift */; };
 		E8F26F8F29EF139400DFFD53 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8F26F8E29EF139400DFFD53 /* Extensions.swift */; };
@@ -102,6 +108,12 @@
 		E8CE62E52A129FE800FA6D46 /* BBImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBImageLoader.swift; sourceTree = "<group>"; };
 		E8DEBCE42A18A49E00CDA8FF /* BBGoal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBGoal.swift; sourceTree = "<group>"; };
 		E8DEBCE62A18A4C600CDA8FF /* BBGender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBGender.swift; sourceTree = "<group>"; };
+		E8DEBCE92A19024B00CDA8FF /* BBProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBProfileView.swift; sourceTree = "<group>"; };
+		E8DEBCEC2A19185700CDA8FF /* BBConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBConstants.swift; sourceTree = "<group>"; };
+		E8DEBCEE2A19192900CDA8FF /* BBBMI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBBMI.swift; sourceTree = "<group>"; };
+		E8DEBCF02A1919AB00CDA8FF /* BBHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBHelpers.swift; sourceTree = "<group>"; };
+		E8DEBCF22A191BCC00CDA8FF /* BBProfileViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBProfileViewViewModel.swift; sourceTree = "<group>"; };
+		E8DEBCF42A191D5200CDA8FF /* BBProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBProfile.swift; sourceTree = "<group>"; };
 		E8F26F8729EF105A00DFFD53 /* BBWorkoutPlanListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBWorkoutPlanListView.swift; sourceTree = "<group>"; };
 		E8F26F8B29EF129900DFFD53 /* BBHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBHomeView.swift; sourceTree = "<group>"; };
 		E8F26F8E29EF139400DFFD53 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
@@ -148,6 +160,7 @@
 			isa = PBXGroup;
 			children = (
 				E81E360629EDBDFE007514B9 /* Resources */,
+				E8DEBCEB2A19184000CDA8FF /* Utils */,
 				E8CE62E42A129FCF00FA6D46 /* Managers */,
 				E8B33CC72A094985003A9977 /* Data */,
 				E8B33CC12A09463F003A9977 /* Models */,
@@ -278,6 +291,8 @@
 				E8DEBCE42A18A49E00CDA8FF /* BBGoal.swift */,
 				E8DEBCE62A18A4C600CDA8FF /* BBGender.swift */,
 				E8B33CC52A094764003A9977 /* BBWorkout.swift */,
+				E8DEBCEE2A19192900CDA8FF /* BBBMI.swift */,
+				E8DEBCF42A191D5200CDA8FF /* BBProfile.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -319,9 +334,27 @@
 			path = Managers;
 			sourceTree = "<group>";
 		};
+		E8DEBCE82A19023000CDA8FF /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				E8DEBCE92A19024B00CDA8FF /* BBProfileView.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		E8DEBCEB2A19184000CDA8FF /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				E8DEBCEC2A19185700CDA8FF /* BBConstants.swift */,
+				E8DEBCF02A1919AB00CDA8FF /* BBHelpers.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 		E8F26F8629EF0DB700DFFD53 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				E8DEBCE82A19023000CDA8FF /* Profile */,
 				E8BEB85D2A115584004C6BA4 /* OnBoarding */,
 				E853A3D12A17D70100954352 /* Home */,
 				E835D6802A13E5AD0041055F /* WorkoutList */,
@@ -354,6 +387,7 @@
 				E88891152A0D395C00E464DA /* BBWorkoutPlanPlayViewViewModel.swift */,
 				E8CBD5052A0FED6F00256778 /* BBWorkoutCellViewModel.swift */,
 				E8BEB8642A1165D8004C6BA4 /* BBOnBoardingViewViewModel.swift */,
+				E8DEBCF22A191BCC00CDA8FF /* BBProfileViewViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -431,9 +465,11 @@
 				E835D67A2A13DC630041055F /* BBPlanDurationCollectionViewCell.swift in Sources */,
 				E8CBD5042A0FCEC400256778 /* BBWorkoutPlanListViewCellViewModel.swift in Sources */,
 				E835D6782A13D7440041055F /* BBCreateWorkoutPlanViewViewModel.swift in Sources */,
+				E8DEBCF52A191D5200CDA8FF /* BBProfile.swift in Sources */,
 				E81E360C29EDC75B007514B9 /* BBProfileViewController.swift in Sources */,
 				E88891162A0D395C00E464DA /* BBWorkoutPlanPlayViewViewModel.swift in Sources */,
 				E8BEB85F2A1155B9004C6BA4 /* BBGoalView.swift in Sources */,
+				E8DEBCED2A19185700CDA8FF /* BBConstants.swift in Sources */,
 				E835D67D2A13DD380041055F /* BBPlanDurationCollectionViewCellViewModel.swift in Sources */,
 				E8DEBCE72A18A4C600CDA8FF /* BBGender.swift in Sources */,
 				E835D67F2A13E5910041055F /* BBWorkoutListViewController.swift in Sources */,
@@ -442,8 +478,10 @@
 				E8BEB8632A115A7F004C6BA4 /* BBGenderView.swift in Sources */,
 				E80A3C8529F1B301002E7D50 /* BBCustomWorkoutPlanListView.swift in Sources */,
 				E84CAF172A0AB0FB00DB1538 /* BBWorkoutCell.swift in Sources */,
+				E8DEBCEA2A19024B00CDA8FF /* BBProfileView.swift in Sources */,
 				E8F26F8F29EF139400DFFD53 /* Extensions.swift in Sources */,
 				E88891142A0D37FF00E464DA /* BBWorkoutPlanPlayView.swift in Sources */,
+				E8DEBCEF2A19192900CDA8FF /* BBBMI.swift in Sources */,
 				E81E360A29EDC73F007514B9 /* BBHomeViewController.swift in Sources */,
 				E84CAF152A0AAE9A00DB1538 /* BBWorkoutPlanDetailViewViewModel.swift in Sources */,
 				E8F26F8C29EF129900DFFD53 /* BBHomeView.swift in Sources */,
@@ -462,6 +500,7 @@
 				E80A3C8729F1B5B7002E7D50 /* BBCustomWorkoutPlanListViewViewModel.swift in Sources */,
 				E835D6822A13E5CA0041055F /* BBWorkoutListView.swift in Sources */,
 				E835D6842A13E71F0041055F /* Workouts.swift in Sources */,
+				E8DEBCF32A191BCC00CDA8FF /* BBProfileViewViewModel.swift in Sources */,
 				E8BEB8652A1165D8004C6BA4 /* BBOnBoardingViewViewModel.swift in Sources */,
 				E8CE62E02A12977700FA6D46 /* BBCreatePlanViewController.swift in Sources */,
 				E80A3C8929F1BAAF002E7D50 /* BBCustomWorkoutPlanListViewCell.swift in Sources */,
@@ -471,6 +510,7 @@
 				E81E360E29EDC7AA007514B9 /* BBTabBarController.swift in Sources */,
 				E8CE62E62A129FE800FA6D46 /* BBImageLoader.swift in Sources */,
 				E853A3D82A17E26600954352 /* BBPhysiqueViewController.swift in Sources */,
+				E8DEBCF12A1919AB00CDA8FF /* BBHelpers.swift in Sources */,
 				E8B33CC02A09453D003A9977 /* BBWorkoutPlanDetailViewController.swift in Sources */,
 				E853A3D62A17E25700954352 /* BBGenderViewController.swift in Sources */,
 			);
