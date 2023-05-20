@@ -14,6 +14,8 @@ protocol BBGoalViewDelegate: AnyObject {
 final class BBGoalView: UIView {
     public weak var delegate: BBGoalViewDelegate?
     
+    private let viewModel = BBOnBoardingViewViewModel.shared
+    
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -72,11 +74,27 @@ final class BBGoalView: UIView {
         addConstraints()
         
         nextButton.addTarget(self, action: #selector(nextButtonAction), for: .touchUpInside)
+        weightLossButton.addTarget(self, action: #selector(weightLossButtonAction), for: .touchUpInside)
+        muscleGainButton.addTarget(self, action: #selector(muscleGainButtonAction), for: .touchUpInside)
     }
     
     @objc
     private func nextButtonAction() {
         delegate?.goToGenderView()
+    }
+    
+    @objc
+    private func weightLossButtonAction() {
+        viewModel.selectGoal(.WeightLoss)
+        muscleGainButton.backgroundColor = UIColor(named: "GrayScale-80")
+        weightLossButton.backgroundColor = UIColor(named: "GrayScale-60")
+    }
+    
+    @objc
+    private func muscleGainButtonAction() {
+        viewModel.selectGoal(.MuscleGain)
+        muscleGainButton.backgroundColor = UIColor(named: "GrayScale-60")
+        weightLossButton.backgroundColor = UIColor(named: "GrayScale-80")
     }
     
     required init?(coder: NSCoder) {

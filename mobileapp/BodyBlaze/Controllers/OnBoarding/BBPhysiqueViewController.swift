@@ -34,4 +34,11 @@ final class BBPhysiqueViewController: UIViewController, BBPhysiqueViewDelegate {
         UserDefaults.standard.set(true, forKey: "onBoardongDone")
         self.navigationController?.setViewControllers([homeVC], animated: true)
     }
+    
+    func displayAlert(_ message: String) {
+        let alertController = UIAlertController(title: message, message: nil, preferredStyle: .alert)
+        let okayAction = UIAlertAction(title: "Okay", style: .default)
+        alertController.addAction(okayAction)
+        present(alertController, animated: true)
+    }
 }

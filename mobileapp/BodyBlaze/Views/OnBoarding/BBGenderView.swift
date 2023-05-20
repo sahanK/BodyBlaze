@@ -78,8 +78,12 @@ final class BBGenderView: UIView {
             nextButton
         )
         addConstraints()
-        
+        setupGestures()
         nextButton.addTarget(self, action: #selector(nextButtonAction), for: .touchUpInside)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init?(coder: NSCoder) is not implemented")
     }
     
     @objc
@@ -87,8 +91,28 @@ final class BBGenderView: UIView {
         delegate?.gotoPhysiqueView()
     }
     
-    required init?(coder: NSCoder) {
-        fatalError("init?(coder: NSCoder) is not implemented")
+    @objc
+    private func genderMaleAction(_ sender: UITapGestureRecognizer) {
+        print("THIS")
+        viewModel.selectGender(gender: .Male)
+        genderMaleImage.backgroundColor = UIColor(named: "GrayScale-60")
+        genderFemaleImage.backgroundColor = UIColor(named: "GrayScale-80")
+    }
+    
+    @objc
+    private func genderFemaleAction(_ sender: UITapGestureRecognizer) {
+        viewModel.selectGender(gender: .Female)
+        genderMaleImage.backgroundColor = UIColor(named: "GrayScale-80")
+        genderFemaleImage.backgroundColor = UIColor(named: "GrayScale-60")
+    }
+    
+    private func setupGestures() {
+        let maleImageGesture = UITapGestureRecognizer(target: self, action:  #selector(genderMaleAction))
+        let femaleImageGesture = UITapGestureRecognizer(target: self, action:  #selector(genderFemaleAction))
+        genderMaleImage.addGestureRecognizer(maleImageGesture)
+        genderFemaleImage.addGestureRecognizer(femaleImageGesture)
+        genderMaleImage.isUserInteractionEnabled = true
+        genderFemaleImage.isUserInteractionEnabled = true
     }
     
     private func addConstraints() {

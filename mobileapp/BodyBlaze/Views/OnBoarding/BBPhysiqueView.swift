@@ -9,10 +9,13 @@ import UIKit
 
 protocol BBPhysiqueViewDelegate: AnyObject {
     func gotoHomeScreen()
+    func displayAlert(_ message: String)
 }
 
 class BBPhysiqueView: UIView {
     public weak var delegate: BBPhysiqueViewDelegate?
+    
+    private let viewModel = BBOnBoardingViewViewModel.shared
     
     private let titleLabel: UILabel = {
         let label = UILabel()
@@ -145,17 +148,36 @@ class BBPhysiqueView: UIView {
             nextButton
         )
         addConstraints()
+        setupGestures()
         
+        viewModel.delegate = self
         nextButton.addTarget(self, action: #selector(nextButtonAction), for: .touchUpInside)
-    }
-    
-    @objc
-    private func nextButtonAction() {
-        delegate?.gotoHomeScreen()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init?(coder: NSCoder) is not implemented")
+    }
+    
+    @objc
+    private func nextButtonAction() {
+        let gotoHome = viewModel.setPhysiqueDetails(
+            inputAge: ageTextInput.text ?? "",
+            inputHeight: heightTextInput.text ?? "",
+            inputWeight: weightTextInput.text ?? ""
+        )
+        if gotoHome {
+            delegate?.gotoHomeScreen()
+        }
+    }
+    
+    private func setupGestures() {
+        let containerGesture = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
+        addGestureRecognizer(containerGesture)
+    }
+    
+    @objc
+    private func dismissKeyboard() {
+        endEditing(true)
     }
     
     private func addConstraints() {
@@ -214,5 +236,11 @@ class BBPhysiqueView: UIView {
             nextButton.rightAnchor.constraint(equalTo: rightAnchor, constant: -10),
             nextButton.heightAnchor.constraint(equalToConstant: 40)
         ])
+    }
+}
+
+extension BBPhysiqueView: BBOnBoardingViewViewModelDelegate {
+    func displayAlert(message: String) {
+        delegate?.displayAlert(message)
     }
 }
