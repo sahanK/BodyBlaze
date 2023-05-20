@@ -7,7 +7,14 @@
 
 import UIKit
 
+protocol BBCustomWorkoutPlanListViewDelegate: AnyObject {
+    func goToCreateScreen()
+    func didSelectWorkoutPlan(_ workoutPlan: BBWorkoutPlan)
+}
+
 final class BBCustomWorkoutPlanListView: UIView {
+    public weak var delegate: BBCustomWorkoutPlanListViewDelegate?
+    
     private let viewModel = BBCustomWorkoutPlanListViewViewModel.shared
     
     private let containerVStack: UIStackView = {
@@ -77,10 +84,17 @@ final class BBCustomWorkoutPlanListView: UIView {
         viewModel.delegate = self
         viewModel.fetchWorkoutPlans()
         setupCollectionView()
+        
+        addNewWorkoutsButton.addTarget(self, action: #selector(createButtonAction), for: .touchUpInside)
     }
     
     required init?(coder: NSCoder) {
         fatalError("init?(coder: NSCoder) is not implemented")
+    }
+    
+    @objc
+    private func createButtonAction() {
+        delegate?.goToCreateScreen()
     }
     
     private func setupCollectionView() {
@@ -142,5 +156,9 @@ extension BBCustomWorkoutPlanListView: BBCustomWorkoutPlanListViewViewModelDeleg
             return
         }
         addNewWorkoutsContainer.isHidden = true
+    }
+    
+    func didSelectWorkoutPlan(_ workoutPlan: BBWorkoutPlan) {
+        delegate?.didSelectWorkoutPlan(workoutPlan)
     }
 }

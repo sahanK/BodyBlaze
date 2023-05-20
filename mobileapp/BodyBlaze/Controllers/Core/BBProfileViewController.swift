@@ -12,8 +12,6 @@ final class BBProfileViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.navigationBar.isHidden = true
-
         view.addSubview(profileView)
         addConstraints()
     }

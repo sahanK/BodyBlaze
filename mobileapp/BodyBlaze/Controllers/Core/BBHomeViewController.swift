@@ -7,13 +7,15 @@
 
 import UIKit
 
-final class BBHomeViewController: UIViewController, BBWorkoutPlanListViewDelegate {
+final class BBHomeViewController: UIViewController {
     private let homeView = BBHomeView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        navigationController?.navigationBar.prefersLargeTitles = true
+        title = "Welcome"
         view.backgroundColor = UIColor(named: "GrayScale-100")
+        homeView.customWorkoutList.delegate = self
         homeView.workoutsList.delegate = self
         view.addSubViews(homeView)
         addConstraints()
@@ -27,7 +29,9 @@ final class BBHomeViewController: UIViewController, BBWorkoutPlanListViewDelegat
             homeView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
         ])
     }
-    
+}
+
+extension BBHomeViewController: BBWorkoutPlanListViewDelegate, BBCustomWorkoutPlanListViewDelegate {
     func bbWorkoutPlanListView(_ workoutPlansListView: BBWorkoutPlanListView, selectedPlan workoutPlane: BBWorkoutPlan) {
         let viewModel = BBWorkoutPlanDetailViewViewModel(workoutPlan: workoutPlane)
         let detailVC = BBWorkoutPlanDetailViewController(viewModel: viewModel)
@@ -39,5 +43,12 @@ final class BBHomeViewController: UIViewController, BBWorkoutPlanListViewDelegat
         let createPlanVC = BBCreatePlanViewController()
         createPlanVC.navigationItem.largeTitleDisplayMode = .never
         navigationController?.pushViewController(createPlanVC, animated: true)
+    }
+    
+    func didSelectWorkoutPlan(_ workoutPlan: BBWorkoutPlan) {
+        let viewModel = BBWorkoutPlanDetailViewViewModel(workoutPlan: workoutPlan)
+        let detailVC = BBWorkoutPlanDetailViewController(viewModel: viewModel)
+        detailVC.navigationItem.largeTitleDisplayMode = .never
+        navigationController?.pushViewController(detailVC, animated: true)
     }
 }

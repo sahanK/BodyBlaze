@@ -10,6 +10,7 @@ import UIKit
 protocol BBCustomWorkoutPlanListViewViewModelDelegate: AnyObject {
     func newWorkoutCreated()
     func displayInitialView(isEmptyList: Bool)
+    func didSelectWorkoutPlan(_ workoutPlan: BBWorkoutPlan)
 }
 
 final class BBCustomWorkoutPlanListViewViewModel: NSObject {
@@ -75,5 +76,11 @@ extension BBCustomWorkoutPlanListViewViewModel: UICollectionViewDelegate, UIColl
         let bounds = UIScreen.main.bounds
         let width = bounds.width * 0.8
         return CGSize(width: width, height: width * 0.9)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        collectionView.deselectItem(at: indexPath, animated: true)
+        let workoutPlan = workoutPlans[indexPath.row]
+        delegate?.didSelectWorkoutPlan(workoutPlan)
     }
 }
