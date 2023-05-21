@@ -73,6 +73,15 @@ final class BBCustomWorkoutPlanListView: UIView {
         return button
     }()
     
+    private let addNewWorkoutsButtonSecondary: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("CREATE", for: .normal)
+        button.contentHorizontalAlignment = .trailing
+        button.setTitleColor(UIColor(named: "Primary"), for: .normal)
+        return button
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         translatesAutoresizingMaskIntoConstraints = false
@@ -86,6 +95,7 @@ final class BBCustomWorkoutPlanListView: UIView {
         setupCollectionView()
         
         addNewWorkoutsButton.addTarget(self, action: #selector(createButtonAction), for: .touchUpInside)
+        addNewWorkoutsButtonSecondary.addTarget(self, action: #selector(createButtonAction), for: .touchUpInside)
     }
     
     required init?(coder: NSCoder) {
@@ -104,6 +114,7 @@ final class BBCustomWorkoutPlanListView: UIView {
     
     private func setupSubViews() {
         containerVStack.addArrangedSubview(yourPlansLabel)
+        containerVStack.addArrangedSubview(addNewWorkoutsButtonSecondary)
         containerVStack.addArrangedSubview(collectionView)
         containerVStack.addArrangedSubview(addNewWorkoutsContainer)
         addNewWorkoutsContainer.addSubview(addNewWorkoutsButton)
@@ -119,8 +130,11 @@ final class BBCustomWorkoutPlanListView: UIView {
             
             yourPlansLabel.topAnchor.constraint(equalTo: containerVStack.topAnchor),
             yourPlansLabel.leadingAnchor.constraint(equalTo: containerVStack.leadingAnchor),
-            yourPlansLabel.trailingAnchor.constraint(equalTo: containerVStack.trailingAnchor),
             yourPlansLabel.heightAnchor.constraint(equalToConstant: 20),
+            
+            addNewWorkoutsButtonSecondary.topAnchor.constraint(equalTo: containerVStack.topAnchor),
+            addNewWorkoutsButtonSecondary.rightAnchor.constraint(equalTo: rightAnchor),
+            addNewWorkoutsButtonSecondary.heightAnchor.constraint(equalToConstant: 20),
             
             collectionView.leadingAnchor.constraint(equalTo: containerVStack.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: containerVStack.trailingAnchor),
@@ -148,14 +162,17 @@ extension BBCustomWorkoutPlanListView: BBCustomWorkoutPlanListViewViewModelDeleg
     func newWorkoutCreated() {
         collectionView.reloadData()
         addNewWorkoutsContainer.isHidden = true
+        addNewWorkoutsButtonSecondary.isHidden = false
     }
     
     func displayInitialView(isEmptyList: Bool) {
         if isEmptyList {
             addNewWorkoutsContainer.isHidden = false
+            addNewWorkoutsButtonSecondary.isHidden = true
             return
         }
         addNewWorkoutsContainer.isHidden = true
+        addNewWorkoutsButtonSecondary.isHidden = false
     }
     
     func didSelectWorkoutPlan(_ workoutPlan: BBWorkoutPlan) {

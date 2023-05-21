@@ -25,7 +25,7 @@ final class BBWorkoutPlanDetailViewController: UIViewController, BBWorkoutPlanDe
     override func viewDidLoad() {
         super.viewDidLoad()
     
-        title = "Workout Plan"
+        title = viewModel.workoutPlan.name
         workoutPlanDetailView.delegate = self
         view.addSubview(workoutPlanDetailView)
         addConstraints()

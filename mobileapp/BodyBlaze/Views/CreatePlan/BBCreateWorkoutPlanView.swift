@@ -157,6 +157,7 @@ final class BBCreateWorkoutPlanView: UIView {
         addConstraints()
         setupCollectionView()
         setupTableView()
+        setupGestures()
         
         addWorkoutsButton.addTarget(self, action: #selector(addWorkoutsButtonAction), for: .touchUpInside)
         saveButton.addTarget(self, action: #selector(saveButtonAction), for: .touchUpInside)
@@ -166,6 +167,16 @@ final class BBCreateWorkoutPlanView: UIView {
     
     required init?(coder: NSCoder) {
         fatalError("init?(coder: NSCoder) is not implemented")
+    }
+    
+    private func setupGestures() {
+        let containerGesture = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
+        nameContainerView.addGestureRecognizer(containerGesture)
+    }
+    
+    @objc
+    private func dismissKeyboard() {
+        endEditing(true)
     }
     
     @objc

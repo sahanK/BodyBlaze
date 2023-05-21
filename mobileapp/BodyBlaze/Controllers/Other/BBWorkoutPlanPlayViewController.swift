@@ -24,7 +24,7 @@ final class BBWorkoutPlanPlayViewController: UIViewController, BBWorkoutPlanPlay
     }
 
     override func viewDidLoad() {
-        title = "Workout Plan"
+        title = viewModel.workoutPlan.name
         super.viewDidLoad()
         
         view.addSubViews(workoutPlanPlayView)
