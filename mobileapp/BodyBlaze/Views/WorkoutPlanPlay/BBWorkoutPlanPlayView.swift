@@ -48,6 +48,19 @@ final class BBWorkoutPlanPlayView: UIView {
         return label
     }()
     
+    private let bodyPartsCollectionView: UICollectionView = {
+        let collectionViewLayout = UICollectionViewFlowLayout()
+        collectionViewLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout)
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.register(
+            BBAffetctedBodyPartCollectionViewCell.self,
+            forCellWithReuseIdentifier: BBAffetctedBodyPartCollectionViewCell.identifier
+        )
+        collectionView.backgroundColor = UIColor(named: "GrayScale-100")
+        return collectionView
+    }()
+    
     private let repsLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -146,6 +159,7 @@ final class BBWorkoutPlanPlayView: UIView {
         setupViews()
         addConstraints()
         configure(viewModel: viewModel)
+        setupCollectionView()
         
         nextButton.addTarget(self, action: #selector(nextButtonAction), for: .touchUpInside)
         previousButton.addTarget(self, action: #selector(previousButtonAction), for: .touchUpInside)
@@ -167,6 +181,7 @@ final class BBWorkoutPlanPlayView: UIView {
         contentView.addSubViews(
             workoutVideoView,
             nameLabel,
+            bodyPartsCollectionView,
             repsLabel,
             finishButton,
             previousButton,
@@ -193,6 +208,11 @@ final class BBWorkoutPlanPlayView: UIView {
         delegate?.goBack()
     }
     
+    private func setupCollectionView() {
+        bodyPartsCollectionView.delegate = viewModel
+        bodyPartsCollectionView.dataSource = viewModel
+    }
+    
     private func addConstraints() {
         NSLayoutConstraint.activate([
             scrollView.topAnchor.constraint(equalTo: topAnchor),
@@ -216,7 +236,12 @@ final class BBWorkoutPlanPlayView: UIView {
             nameLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 10),
             nameLabel.heightAnchor.constraint(equalToConstant: 20),
             
-            repsLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 20),
+            bodyPartsCollectionView.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 5),
+            bodyPartsCollectionView.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 10),
+            bodyPartsCollectionView.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -10),
+            bodyPartsCollectionView.heightAnchor.constraint(equalToConstant: 40),
+            
+            repsLabel.topAnchor.constraint(equalTo: bodyPartsCollectionView.bottomAnchor, constant: 20),
             repsLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             repsLabel.heightAnchor.constraint(equalToConstant: 50),
             
@@ -305,5 +330,7 @@ final class BBWorkoutPlanPlayView: UIView {
             nextWorkoutLabel.isHidden = true
             nextWorkoutView.isHidden = true
         }
+        
+        bodyPartsCollectionView.reloadData()
     }
 }

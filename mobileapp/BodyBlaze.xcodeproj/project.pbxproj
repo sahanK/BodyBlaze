@@ -13,6 +13,8 @@
 		E801EFE52A19EE5B00300562 /* BBEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = E801EFE42A19EE5B00300562 /* BBEndpoint.swift */; };
 		E801EFE92A19F52D00300562 /* BBGetAllWorkoutPlansResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = E801EFE82A19F52D00300562 /* BBGetAllWorkoutPlansResponse.swift */; };
 		E801EFEB2A1A1B3F00300562 /* BBGetAllWorkoutsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = E801EFEA2A1A1B3F00300562 /* BBGetAllWorkoutsResponse.swift */; };
+		E801EFED2A1A6F9900300562 /* BBAffetctedBodyPartCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E801EFEC2A1A6F9900300562 /* BBAffetctedBodyPartCollectionViewCell.swift */; };
+		E801EFF02A1A700800300562 /* BBAffetctedBodyPartCollectionViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E801EFEF2A1A700800300562 /* BBAffetctedBodyPartCollectionViewCellViewModel.swift */; };
 		E80427C42A0BF7760014E621 /* BBWorkoutPlanPlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E80427C32A0BF7760014E621 /* BBWorkoutPlanPlayViewController.swift */; };
 		E80A3C8529F1B301002E7D50 /* BBCustomWorkoutPlanListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E80A3C8429F1B301002E7D50 /* BBCustomWorkoutPlanListView.swift */; };
 		E80A3C8729F1B5B7002E7D50 /* BBCustomWorkoutPlanListViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E80A3C8629F1B5B7002E7D50 /* BBCustomWorkoutPlanListViewViewModel.swift */; };
@@ -76,6 +78,8 @@
 		E801EFE42A19EE5B00300562 /* BBEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBEndpoint.swift; sourceTree = "<group>"; };
 		E801EFE82A19F52D00300562 /* BBGetAllWorkoutPlansResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBGetAllWorkoutPlansResponse.swift; sourceTree = "<group>"; };
 		E801EFEA2A1A1B3F00300562 /* BBGetAllWorkoutsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBGetAllWorkoutsResponse.swift; sourceTree = "<group>"; };
+		E801EFEC2A1A6F9900300562 /* BBAffetctedBodyPartCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBAffetctedBodyPartCollectionViewCell.swift; sourceTree = "<group>"; };
+		E801EFEF2A1A700800300562 /* BBAffetctedBodyPartCollectionViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBAffetctedBodyPartCollectionViewCellViewModel.swift; sourceTree = "<group>"; };
 		E80427C32A0BF7760014E621 /* BBWorkoutPlanPlayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBWorkoutPlanPlayViewController.swift; sourceTree = "<group>"; };
 		E80A3C8429F1B301002E7D50 /* BBCustomWorkoutPlanListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBCustomWorkoutPlanListView.swift; sourceTree = "<group>"; };
 		E80A3C8629F1B5B7002E7D50 /* BBCustomWorkoutPlanListViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBCustomWorkoutPlanListViewViewModel.swift; sourceTree = "<group>"; };
@@ -158,7 +162,6 @@
 				6027E614DAC4C11E43F55FD3 /* Pods-BodyBlaze.debug.xcconfig */,
 				2031E5E2E6BD4F7EB3CBDB83 /* Pods-BodyBlaze.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -192,6 +195,15 @@
 				E801EFEA2A1A1B3F00300562 /* BBGetAllWorkoutsResponse.swift */,
 			);
 			path = APIResponseType;
+			sourceTree = "<group>";
+		};
+		E801EFEE2A1A6FDB00300562 /* WorkoutPlanPlay */ = {
+			isa = PBXGroup;
+			children = (
+				E88891152A0D395C00E464DA /* BBWorkoutPlanPlayViewViewModel.swift */,
+				E801EFEF2A1A700800300562 /* BBAffetctedBodyPartCollectionViewCellViewModel.swift */,
+			);
+			path = WorkoutPlanPlay;
 			sourceTree = "<group>";
 		};
 		E80A3C8129F1B257002E7D50 /* CustomWorkoutPlans */ = {
@@ -326,6 +338,7 @@
 			isa = PBXGroup;
 			children = (
 				E88891132A0D37FF00E464DA /* BBWorkoutPlanPlayView.swift */,
+				E801EFEC2A1A6F9900300562 /* BBAffetctedBodyPartCollectionViewCell.swift */,
 			);
 			path = WorkoutPlanPlay;
 			sourceTree = "<group>";
@@ -443,9 +456,9 @@
 				E835D6862A13E79B0041055F /* CustomWorkoutPlanList */,
 				E835D6852A13E7800041055F /* WorkoutPlanList */,
 				E835D67B2A13DD150041055F /* CreatePlan */,
-				E84CAF142A0AAE9A00DB1538 /* BBWorkoutPlanDetailViewViewModel.swift */,
+				E801EFEE2A1A6FDB00300562 /* WorkoutPlanPlay */,
 				E835D6892A13EEE70041055F /* BBWorkoutListViewViewModel.swift */,
-				E88891152A0D395C00E464DA /* BBWorkoutPlanPlayViewViewModel.swift */,
+				E84CAF142A0AAE9A00DB1538 /* BBWorkoutPlanDetailViewViewModel.swift */,
 				E8CBD5052A0FED6F00256778 /* BBWorkoutCellViewModel.swift */,
 				E8BEB8642A1165D8004C6BA4 /* BBOnBoardingViewViewModel.swift */,
 				E8DEBCF22A191BCC00CDA8FF /* BBProfileViewViewModel.swift */,
@@ -595,6 +608,7 @@
 				E8F26F9229EF189300DFFD53 /* BBWorkoutPlanListViewViewModel.swift in Sources */,
 				E801EFE52A19EE5B00300562 /* BBEndpoint.swift in Sources */,
 				E8CE62E32A129A6200FA6D46 /* BBCreateWorkoutPlanView.swift in Sources */,
+				E801EFED2A1A6F9900300562 /* BBAffetctedBodyPartCollectionViewCell.swift in Sources */,
 				E81E35F329EDBC93007514B9 /* AppDelegate.swift in Sources */,
 				E80427C42A0BF7760014E621 /* BBWorkoutPlanPlayViewController.swift in Sources */,
 				E82EDAF629F06A3D00270C6D /* BBWorkoutPanListCell.swift in Sources */,
@@ -617,6 +631,7 @@
 				E8F26F8829EF105A00DFFD53 /* BBWorkoutPlanListView.swift in Sources */,
 				E81E360E29EDC7AA007514B9 /* BBTabBarController.swift in Sources */,
 				E8CE62E62A129FE800FA6D46 /* BBImageLoader.swift in Sources */,
+				E801EFF02A1A700800300562 /* BBAffetctedBodyPartCollectionViewCellViewModel.swift in Sources */,
 				E853A3D82A17E26600954352 /* BBPhysiqueViewController.swift in Sources */,
 				E8DEBCF12A1919AB00CDA8FF /* BBHelpers.swift in Sources */,
 				E8B33CC02A09453D003A9977 /* BBWorkoutPlanDetailViewController.swift in Sources */,
