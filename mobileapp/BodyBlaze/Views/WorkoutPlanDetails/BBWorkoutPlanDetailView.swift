@@ -26,6 +26,7 @@ final class BBWorkoutPlanDetailView: UIView {
         imageView.layer.cornerRadius = 10
         imageView.layer.masksToBounds = true
         imageView.backgroundColor = UIColor(named: "GrayScale-80")
+        imageView.image = UIImage(named: "CustomWorkoutPlan")
         return imageView
     }()
     

@@ -264,6 +264,20 @@ final class BBWorkoutPlanPlayView: UIView {
         if viewModel.currentWorkout < viewModel.workoutPlan.workouts.count {
             nameLabel.text = viewModel.workoutPlan.workouts[viewModel.currentWorkout].name
             repsLabel.text = "x\(viewModel.workoutPlan.workouts[viewModel.currentWorkout].reps)"
+            
+            viewModel.fetchImage(
+                url: viewModel.workoutPlan.workouts[viewModel.currentWorkout].image
+            ) { [weak self] result in
+                switch result {
+                case .success(let data):
+                    let image = UIImage(data: data)
+                    DispatchQueue.main.async {
+                        self?.workoutImageView.image = image
+                    }
+                case .failure(let error):
+                    print(String(describing: error))
+                }
+            }
         }
         
         if viewModel.currentWorkout < viewModel.workoutPlan.workouts.count - 1 {
@@ -271,37 +285,23 @@ final class BBWorkoutPlanPlayView: UIView {
             nextWorkoutView.isHidden = false
             nextWorkoutNameLabel.text = viewModel.workoutPlan.workouts[viewModel.currentWorkout + 1].name
             nextWorkoutRepsLabel.text = "\(viewModel.workoutPlan.workouts[viewModel.currentWorkout + 1].reps) reps"
+            
+            viewModel.fetchImage(
+                url: viewModel.workoutPlan.workouts[viewModel.currentWorkout + 1].image
+            ) { [weak self] result in
+                switch result {
+                case .success(let data):
+                    let image = UIImage(data: data)
+                    DispatchQueue.main.async {
+                        self?.nextWorkoutImageView.image = image
+                    }
+                case .failure(let error):
+                    print(String(describing: error))
+                }
+            }
         } else {
             nextWorkoutLabel.isHidden = true
             nextWorkoutView.isHidden = true
-        }
-        
-        viewModel.fetchImage(
-            url: viewModel.workoutPlan.workouts[viewModel.currentWorkout].image
-        ) { [weak self] result in
-            switch result {
-            case .success(let data):
-                let image = UIImage(data: data)
-                DispatchQueue.main.async {
-                    self?.workoutImageView.image = image
-                }
-            case .failure(let error):
-                print(String(describing: error))
-            }
-        }
-        
-        viewModel.fetchImage(
-            url: viewModel.workoutPlan.workouts[viewModel.currentWorkout + 1].image
-        ) { [weak self] result in
-            switch result {
-            case .success(let data):
-                let image = UIImage(data: data)
-                DispatchQueue.main.async {
-                    self?.nextWorkoutImageView.image = image
-                }
-            case .failure(let error):
-                print(String(describing: error))
-            }
         }
     }
 }

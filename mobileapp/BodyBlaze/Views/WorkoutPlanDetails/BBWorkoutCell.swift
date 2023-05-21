@@ -16,7 +16,7 @@ class BBWorkoutCell: UITableViewCell {
         imageView.contentMode = .scaleToFill
         imageView.layer.cornerRadius = 10
         imageView.layer.masksToBounds = true
-        imageView.image = UIImage(named: "recommended-bg-1")
+        imageView.backgroundColor = UIColor(named: "GrayScale-60")
         return imageView
     }()
     
