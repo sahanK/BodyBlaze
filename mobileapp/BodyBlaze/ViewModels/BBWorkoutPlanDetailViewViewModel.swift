@@ -14,6 +14,14 @@ final class BBWorkoutPlanDetailViewViewModel: NSObject {
     init(workoutPlan: BBWorkoutPlan) {
         self.workoutPlan = workoutPlan
     }
+    
+    public func fetchImage(completion: @escaping (Result<Data, Error>) -> Void) {
+        guard let url = URL(string: workoutPlan.image ?? "") else {
+            completion(.failure(URLError(.badURL)))
+            return
+        }
+        BBImageLoader.shared.downloadImage(url, completion: completion)
+    }
 }
 
 extension BBWorkoutPlanDetailViewViewModel: UITableViewDelegate, UITableViewDataSource {
@@ -30,7 +38,8 @@ extension BBWorkoutPlanDetailViewViewModel: UITableViewDelegate, UITableViewData
         }
         let viewModel = BBWorkoutCellViewModel(
             title: workoutPlan.workouts[indexPath.row].name,
-            numberOfReps: workoutPlan.workouts[indexPath.row].reps
+            numberOfReps: workoutPlan.workouts[indexPath.row].reps,
+            imageUrl: workoutPlan.workouts[indexPath.row].image
         )
         cell.configure(with: viewModel)
         return cell

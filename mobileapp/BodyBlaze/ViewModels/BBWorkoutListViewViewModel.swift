@@ -32,7 +32,8 @@ extension BBWorkoutListViewViewModel: UITableViewDataSource, UITableViewDelegate
         }
         let viewModel = BBWorkoutCellViewModel(
             title: workouts[indexPath.row].name,
-            numberOfReps: workouts[indexPath.row].reps
+            numberOfReps: workouts[indexPath.row].reps,
+            imageUrl: ""
         )
         cell.configure(with: viewModel)
         return cell

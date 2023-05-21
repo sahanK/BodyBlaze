@@ -68,7 +68,7 @@ class BBWorkoutCell: UITableViewCell {
             workoutImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 7),
             workoutImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -7),
             workoutImageView.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 7),
-            workoutImageView.widthAnchor.constraint(equalToConstant: 86),
+            workoutImageView.widthAnchor.constraint(equalToConstant: 76),
             
             nameLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 7),
             nameLabel.leftAnchor.constraint(equalTo: workoutImageView.rightAnchor, constant: 10),
@@ -83,6 +83,17 @@ class BBWorkoutCell: UITableViewCell {
     public func configure(with viewModel: BBWorkoutCellViewModel) {
         nameLabel.text = viewModel.title
         repsLabel.text = "\(viewModel.numberOfReps) reps"
+        viewModel.fetchImage { [weak self] result in
+            switch result {
+            case .success(let data):
+                let image = UIImage(data: data)
+                DispatchQueue.main.async {
+                    self?.workoutImageView.image = image
+                }
+            case .failure(let error):
+                print(String(describing: error))
+            }
+        }
     }
 
 }

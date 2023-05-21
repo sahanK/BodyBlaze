@@ -25,7 +25,7 @@ final class BBWorkoutPlanDetailView: UIView {
         imageView.contentMode = .scaleToFill
         imageView.layer.cornerRadius = 10
         imageView.layer.masksToBounds = true
-        imageView.image = UIImage(named: "recommended-bg-1")
+        imageView.backgroundColor = UIColor(named: "GrayScale-80")
         return imageView
     }()
     
@@ -72,7 +72,7 @@ final class BBWorkoutPlanDetailView: UIView {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("START", for: .normal)
-        button.backgroundColor = .systemBlue
+        button.backgroundColor = UIColor(named: "Primary")
         button.layer.cornerRadius = 10
         return button
     }()
@@ -153,9 +153,19 @@ final class BBWorkoutPlanDetailView: UIView {
     }
     
     private func configure(with viewModel: BBWorkoutPlanDetailViewViewModel) {
-//        imageView.image = UIImage(named: "")
         descriptionLabel.text = viewModel.workoutPlan.description
         numberOfWorkoutsLabel.text = "\(viewModel.workoutPlan.workouts.count) workouts"
         durationLabel.text = "\(viewModel.workoutPlan.duration) weeks"
+        viewModel.fetchImage { [weak self] result in
+            switch result {
+            case .success(let data):
+                let image = UIImage(data: data)
+                DispatchQueue.main.async {
+                    self?.imageView.image = image
+                }
+            case .failure(let error):
+                print(String(describing: error))
+            }
+        }
     }
 }

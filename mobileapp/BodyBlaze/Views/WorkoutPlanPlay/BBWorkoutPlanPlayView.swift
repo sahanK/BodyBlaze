@@ -61,7 +61,8 @@ final class BBWorkoutPlanPlayView: UIView {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("FINISH", for: .normal)
-        button.backgroundColor = .systemPurple
+        button.layer.borderWidth = 1
+        button.layer.borderColor = UIColor(named: "Primary")?.cgColor
         button.layer.cornerRadius = 10
         return button
     }()
@@ -273,6 +274,34 @@ final class BBWorkoutPlanPlayView: UIView {
         } else {
             nextWorkoutLabel.isHidden = true
             nextWorkoutView.isHidden = true
+        }
+        
+        viewModel.fetchImage(
+            url: viewModel.workoutPlan.workouts[viewModel.currentWorkout].image
+        ) { [weak self] result in
+            switch result {
+            case .success(let data):
+                let image = UIImage(data: data)
+                DispatchQueue.main.async {
+                    self?.workoutImageView.image = image
+                }
+            case .failure(let error):
+                print(String(describing: error))
+            }
+        }
+        
+        viewModel.fetchImage(
+            url: viewModel.workoutPlan.workouts[viewModel.currentWorkout + 1].image
+        ) { [weak self] result in
+            switch result {
+            case .success(let data):
+                let image = UIImage(data: data)
+                DispatchQueue.main.async {
+                    self?.nextWorkoutImageView.image = image
+                }
+            case .failure(let error):
+                print(String(describing: error))
+            }
         }
     }
 }

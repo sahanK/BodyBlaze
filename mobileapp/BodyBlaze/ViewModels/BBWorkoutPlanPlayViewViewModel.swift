@@ -28,5 +28,13 @@ final class BBWorkoutPlanPlayViewViewModel {
             currentWorkout -= 1
         }
     }
+    
+    public func fetchImage(url: String, completion: @escaping (Result<Data, Error>) -> Void) {
+        guard let url = URL(string: url) else {
+            completion(.failure(URLError(.badURL)))
+            return
+        }
+        BBImageLoader.shared.downloadImage(url, completion: completion)
+    }
 }
 
