@@ -7,11 +7,14 @@
 
 import Foundation
 
+/// SIngleton class for fetching images
 final class BBImageLoader {
     static let shared = BBImageLoader()
     
+    /// Images cache
     private let imageDataCache = NSCache<NSString, NSData>()
     
+    /// Download image or get from cache
     func downloadImage(_ url: URL, completion: @escaping (Result<Data, Error>) -> Void) {
         let cacheKey = url.absoluteString as NSString
         if let data = imageDataCache.object(forKey: cacheKey) {

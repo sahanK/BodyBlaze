@@ -7,11 +7,13 @@
 
 import Foundation
 
+/// Class to create a request object
 final class BBRequest {
     private struct Constants {
         static let baseUrl = "https://bodyblaze.onrender.com/api/v1"
     }
     
+    /// Endpoint of the request
     let endpoint: BBEndpoint
     
     private var urlString: String {
@@ -25,6 +27,7 @@ final class BBRequest {
         return URL(string: urlString)
     }
     
+    /// HTTP method of the request
     public let httpMethod = "GET"
     
     public init(endpoint: BBEndpoint) {

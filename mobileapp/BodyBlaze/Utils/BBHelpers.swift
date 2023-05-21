@@ -7,12 +7,14 @@
 
 import Foundation
 
+/// Calculate the BMI using height and weight
 func calculateBMI(height: Double, weight: Double) -> Double {
     let heightMeters = height / 100
     let bmi = weight / (heightMeters * heightMeters)
     return round(bmi * 10) / 10.0
 }
 
+/// Get the BMI level from the BMI value
 func getBmiLevel(bmiValue: Double) -> BBBMI {
     if bmiValue <= 18.4 {
         return .Underweight
@@ -29,6 +31,7 @@ func getBmiLevel(bmiValue: Double) -> BBBMI {
     return .Normal
 }
 
+/// Ge the video ID from a YouTube URL
 func getYouTubeIdFromUrl(url: String) -> String {
     guard let urlComponents = URLComponents(string: url) else { return "" }
     guard let id = urlComponents.queryItems?.first(where: { $0.name == "v" }) else { return "" }

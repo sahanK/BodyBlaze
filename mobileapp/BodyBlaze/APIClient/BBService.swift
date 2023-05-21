@@ -7,14 +7,17 @@
 
 import Foundation
 
+/// Singleton class to manage API requests
 final class BBService {
     static let shared = BBService()
     
+    /// Custom error messages
     enum BBServiceError: Error {
         case failedToCreateRequest
         case failedToGetData
     }
     
+    /// Generic function to return specific Data type afetr executing API request
     func execute<T: Codable>(
         _ request: BBRequest,
         expecting type: T.Type,

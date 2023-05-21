@@ -7,9 +7,11 @@
 
 import Foundation
 
+/// SIngleton class for read and write files
 final class BBFileManager {
     static let shared = BBFileManager()
     
+    /// Write data to a file with specific name
     func writeData(data: Encodable, fileName: String) {
         guard let fileUrl = try? FileManager.default.url(
             for: .documentDirectory,
@@ -22,6 +24,7 @@ final class BBFileManager {
         try? JSONEncoder().encode(data).write(to: fileUrl)
     }
     
+    /// Read data from a file with specific name
     func readData<T: Codable>(expecting type: T.Type, fileName: String) -> T? {
         guard let fileUrl = try? FileManager.default.url(
             for: .documentDirectory,
