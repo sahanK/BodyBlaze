@@ -12,6 +12,7 @@ connectDB();
 
 // Route files
 const workoutPlans = require('./routes/workoutPlans');
+const workouts = require('./routes/workouts');
 
 const app = express();
 
@@ -19,6 +20,7 @@ const app = express();
 app.use(cors());
 // Mount routers
 app.use('/api/v1/workoutPlans', workoutPlans);
+app.use('/api/v1/workouts', workouts);
 
 // Error handling middleware
 app.use(errorHandler);
