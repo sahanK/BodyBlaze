@@ -13,7 +13,7 @@ let workoutsData: [BBWorkout] = [
         name: "Workout 1",
         reps: 12,
         bodyParts: ["Chest", "Arms", "Legs"],
-        time: 300,
+//        time: 300,
         image: "",
         video: ""
     ),
@@ -22,7 +22,7 @@ let workoutsData: [BBWorkout] = [
         name: "Workout 2",
         reps: 12,
         bodyParts: ["Chest", "Arms", "Legs"],
-        time: 300,
+//        time: 300,
         image: "",
         video: ""
     ),
@@ -31,7 +31,7 @@ let workoutsData: [BBWorkout] = [
         name: "Workout 3",
         reps: 12,
         bodyParts: ["Chest", "Arms", "Legs"],
-        time: 300,
+//        time: 300,
         image: "",
         video: ""
     ),

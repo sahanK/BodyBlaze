@@ -12,7 +12,7 @@ struct BBWorkout: Codable {
     var name: String
     var reps: Int
     var bodyParts: [String]
-    var time: Int
+//    var time: Int
     var image: String
     var video: String
 }

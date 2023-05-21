@@ -25,7 +25,8 @@ final class BBCustomWorkoutPlanListViewViewModel: NSObject {
                     title: workoutPlan.name,
                     numberOfWorkouts: workoutPlan.workouts.count,
                     duration: workoutPlan.duration,
-                    imageUrl: "https://post.healthline.com/wp-content/uploads/2020/02/man-exercising-plank-push-up-1200x628-facebook.jpg"
+                    imageUrl: "https://post.healthline.com/wp-content/uploads/2020/02/man-exercising-plank-push-up-1200x628-facebook.jpg",
+                    description: workoutPlan.description ?? ""
                 )
                 
                 if !workoutPlanCellViewModels.contains(viewModel) {

@@ -19,6 +19,13 @@ final class BBWorkoutPlanListView: UIView {
     
     private let viewModel = BBWorkoutPlanListViewViewModel()
     
+    private let spinner: UIActivityIndicatorView = {
+        let spinner = UIActivityIndicatorView(style: .large)
+        spinner.hidesWhenStopped = true
+        spinner.translatesAutoresizingMaskIntoConstraints = false
+        return spinner
+    }()
+    
     private let containerVStack: UIStackView = {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -53,6 +60,8 @@ final class BBWorkoutPlanListView: UIView {
         tableView.showsVerticalScrollIndicator = false
         tableView.separatorStyle = .none
         tableView.backgroundColor = UIColor(named: "GrayScale-100")
+        tableView.isHidden = true
+        tableView.alpha = 0
         return tableView
     }()
     
@@ -81,6 +90,8 @@ final class BBWorkoutPlanListView: UIView {
         titleHStack.addArrangedSubview(recommendedWorkoutsLabel)
         containerVStack.addArrangedSubview(titleHStack)
         containerVStack.addArrangedSubview(tableView)
+        containerVStack.addArrangedSubview(spinner)
+        spinner.startAnimating()
     }
     
     private func addConstraints() {
@@ -97,6 +108,12 @@ final class BBWorkoutPlanListView: UIView {
             tableView.leadingAnchor.constraint(equalTo: containerVStack.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: containerVStack.trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: containerVStack.bottomAnchor),
+            
+            spinner.topAnchor.constraint(equalTo: containerVStack.topAnchor),
+            spinner.heightAnchor.constraint(equalToConstant: 100),
+            spinner.widthAnchor.constraint(equalToConstant: 100),
+            spinner.centerXAnchor.constraint(equalTo: containerVStack.centerXAnchor),
+            spinner.centerYAnchor.constraint(equalTo: containerVStack.centerYAnchor)
         ])
     }
 }
@@ -104,5 +121,15 @@ final class BBWorkoutPlanListView: UIView {
 extension BBWorkoutPlanListView: BBWorkoutPlanListViewModelDelegate {
     func didSelectWorkoutPlan(_ workoutPlan: BBWorkoutPlan) {
         delegate?.bbWorkoutPlanListView(self, selectedPlan: workoutPlan)
+    }
+    
+    func didLoadWorkoutPlans() {
+        self.spinner.stopAnimating()
+        self.spinner.isHidden = true
+        self.tableView.isHidden = false
+        tableView.reloadData()
+        UIView.animate(withDuration: 0.4) {
+            self.tableView.alpha = 1
+        }
     }
 }

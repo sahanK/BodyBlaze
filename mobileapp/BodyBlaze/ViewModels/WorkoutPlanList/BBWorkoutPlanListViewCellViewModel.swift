@@ -13,17 +13,20 @@ final class BBWorkoutPlanListViewCellViewModel: Hashable {
     public let numberOfWorkouts: Int
     public let duration: Int
     public let imageUrl: String
+    public let description: String
     
     init(
         title: String,
         numberOfWorkouts: Int,
         duration: Int,
-        imageUrl: String
+        imageUrl: String,
+        description: String
     ) {
         self.title = title
         self.numberOfWorkouts = numberOfWorkouts
         self.duration = duration
         self.imageUrl = imageUrl
+        self.description = description
     }
     
     public func fetchImage(completion: @escaping (Result<Data, Error>) -> Void) {

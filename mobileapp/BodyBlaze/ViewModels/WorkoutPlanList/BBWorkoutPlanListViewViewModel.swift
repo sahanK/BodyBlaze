@@ -9,6 +9,7 @@ import UIKit
 
 protocol BBWorkoutPlanListViewModelDelegate: AnyObject {
     func didSelectWorkoutPlan(_ workoutPlan: BBWorkoutPlan)
+    func didLoadWorkoutPlans()
 }
 
 final class BBWorkoutPlanListViewViewModel: NSObject {
@@ -21,7 +22,8 @@ final class BBWorkoutPlanListViewViewModel: NSObject {
                     title: workoutPlan.name,
                     numberOfWorkouts: workoutPlan.workouts.count,
                     duration: workoutPlan.duration,
-                    imageUrl: "https://post.healthline.com/wp-content/uploads/2020/02/man-exercising-plank-push-up-1200x628-facebook.jpg"
+                    imageUrl: workoutPlan.image ?? "",
+                    description: workoutPlan.description ?? ""
                 )
                 
                 workoutPlanCellViewModels.append(viewModel)
@@ -32,7 +34,20 @@ final class BBWorkoutPlanListViewViewModel: NSObject {
     private var workoutPlanCellViewModels: [BBWorkoutPlanListViewCellViewModel] = []
     
     public func fetchWorkoutPlans() {
-        workoutPlans = workoutPlansData
+        BBService.shared.execute(
+            .workoutPlans,
+            expecting: BBGetAllWorkoutPlansResponse.self) { [weak self] result in
+                switch result {
+                case .success(let response):
+                    print(response.data)
+                    self?.workoutPlans = response.data
+                    DispatchQueue.main.async {
+                        self?.delegate?.didLoadWorkoutPlans()
+                    }
+                case .failure(let error):
+                    print(String(describing: error))
+                }
+            }
     }
 }
 
