@@ -16,6 +16,13 @@ final class BBWorkoutListView: UIView {
     
     private let viewModel = BBWorkoutListViewViewModel()
     
+    private let spinner: UIActivityIndicatorView = {
+        let spinner = UIActivityIndicatorView(style: .large)
+        spinner.hidesWhenStopped = true
+        spinner.translatesAutoresizingMaskIntoConstraints = false
+        return spinner
+    }()
+    
     private let workoutTableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -26,6 +33,8 @@ final class BBWorkoutListView: UIView {
         tableView.showsVerticalScrollIndicator = false
         tableView.separatorStyle = .none
         tableView.backgroundColor = UIColor(named: "GrayScale-100")
+        tableView.isHidden = true
+        tableView.alpha = 0
         return tableView
     }()
     
@@ -33,10 +42,12 @@ final class BBWorkoutListView: UIView {
         super.init(frame: frame)
         translatesAutoresizingMaskIntoConstraints = false
         
-        addSubview(workoutTableView)
+        addSubViews(spinner, workoutTableView)
         addConstraints()
         setupTableView()
         viewModel.delegate = self
+        spinner.startAnimating()
+        viewModel.fetchWorkouts()
     }
     
     required init?(coder: NSCoder) {
@@ -54,6 +65,11 @@ final class BBWorkoutListView: UIView {
             workoutTableView.bottomAnchor.constraint(equalTo: bottomAnchor),
             workoutTableView.leftAnchor.constraint(equalTo: leftAnchor),
             workoutTableView.rightAnchor.constraint(equalTo: rightAnchor),
+            
+            spinner.heightAnchor.constraint(equalToConstant: 100),
+            spinner.widthAnchor.constraint(equalToConstant: 100),
+            spinner.centerXAnchor.constraint(equalTo: centerXAnchor),
+            spinner.centerYAnchor.constraint(equalTo: centerYAnchor),
         ])
     }
 }
@@ -61,5 +77,14 @@ final class BBWorkoutListView: UIView {
 extension BBWorkoutListView: BBWorkoutListViewViewModelDelegate {
     func didSelectWorkout(_ workout: BBWorkout) {
         delegate?.didSelectWorkout(workout)
+    }
+    
+    func didLoadWorkouts() {
+        spinner.stopAnimating()
+        workoutTableView.isHidden = false
+        workoutTableView.reloadData()
+        UIView.animate(withDuration: 0.4) {
+            self.workoutTableView.alpha = 1
+        }
     }
 }

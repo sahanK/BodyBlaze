@@ -108,7 +108,7 @@ extension BBCreateWorkoutPlanViewViewModel: UITableViewDataSource, UITableViewDe
         let viewModel = BBWorkoutCellViewModel(
             title: selectedWorkouts[indexPath.row].name,
             numberOfReps: selectedWorkouts[indexPath.row].reps,
-            imageUrl: ""
+            imageUrl: selectedWorkouts[indexPath.row].image
         )
         cell.configure(with: viewModel)
         return cell

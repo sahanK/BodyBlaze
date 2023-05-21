@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class BBWorkoutCellViewModel {
+final class BBWorkoutCellViewModel: Hashable {
     public let title: String
     public let numberOfReps: Int
     public let imageUrl: String
@@ -24,5 +24,17 @@ final class BBWorkoutCellViewModel {
             return
         }
         BBImageLoader.shared.downloadImage(url, completion: completion)
+    }
+}
+
+extension BBWorkoutCellViewModel: Equatable {
+    static func == (lhs: BBWorkoutCellViewModel, rhs: BBWorkoutCellViewModel) -> Bool {
+        return lhs.hashValue == rhs.hashValue
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(title)
+        hasher.combine(numberOfReps)
+        hasher.combine(imageUrl)
     }
 }

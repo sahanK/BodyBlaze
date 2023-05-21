@@ -34,4 +34,5 @@ final class BBRequest {
 
 extension BBRequest {
     static let workoutPlans = BBRequest(endpoint: .workoutPlans)
+    static let workouts = BBRequest(endpoint: .workouts)
 }

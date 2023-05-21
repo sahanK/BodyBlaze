@@ -10,12 +10,46 @@ import UIKit
 
 protocol BBWorkoutListViewViewModelDelegate: AnyObject {
     func didSelectWorkout(_ workout: BBWorkout)
+    func didLoadWorkouts()
 }
 
 final class BBWorkoutListViewViewModel: NSObject {
     public weak var delegate: BBWorkoutListViewViewModelDelegate?
     
-    public let workouts = workoutsData
+    private var workouts: [BBWorkout] = [] {
+        didSet {
+            for workout in workouts {
+                let viewModel = BBWorkoutCellViewModel(
+                    title: workout.name,
+                    numberOfReps: workout.reps,
+                    imageUrl: workout.image
+                )
+                
+                if !workoutCellViewModels.contains(viewModel) {
+                    workoutCellViewModels.append(viewModel)
+                }
+            }
+        }
+    }
+    
+    private var workoutCellViewModels: [BBWorkoutCellViewModel] = []
+    
+    func fetchWorkouts() {
+        BBService.shared.execute(
+            .workouts,
+            expecting: BBGetAllWorkoutsResponse.self
+        ) { [weak self] result in
+            switch result {
+            case .success(let response):
+                self?.workouts = response.data
+                DispatchQueue.main.async {
+                    self?.delegate?.didLoadWorkouts()
+                }
+            case .failure(let error):
+                print(String(describing: error))
+            }
+        }
+    }
 }
 
 extension BBWorkoutListViewViewModel: UITableViewDataSource, UITableViewDelegate {
@@ -30,11 +64,7 @@ extension BBWorkoutListViewViewModel: UITableViewDataSource, UITableViewDelegate
         ) as? BBWorkoutCell else {
             fatalError("Unsupported cell")
         }
-        let viewModel = BBWorkoutCellViewModel(
-            title: workouts[indexPath.row].name,
-            numberOfReps: workouts[indexPath.row].reps,
-            imageUrl: ""
-        )
+        let viewModel = workoutCellViewModels[indexPath.row]
         cell.configure(with: viewModel)
         return cell
     }
