@@ -10,21 +10,13 @@ import UIKit
 final class BBCustomWorkoutPlanListViewCell: UICollectionViewCell {
     static let identifier = "BBCustomWorkoutPlanListViewCell"
     
-    private let imageContainerView: UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = UIColor(named: "GrayScale-60")
-        view.layer.cornerRadius = 10
-        return view
-    }()
-    
     private let workoutImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFill
         imageView.layer.cornerRadius = 10
         imageView.layer.masksToBounds = true
-        imageView.image = UIImage(named: "CustomWorkoutPlan")
+        imageView.image = UIImage(named: "WorkoutPlanDefault")
         imageView.backgroundColor = UIColor(named: "GrayScale-60")
         return imageView
     }()
@@ -50,7 +42,7 @@ final class BBCustomWorkoutPlanListViewCell: UICollectionViewCell {
         super.init(frame: frame)
         backgroundColor = UIColor(named: "GrayScale-80")
         layer.cornerRadius = 15
-        contentView.addSubViews(imageContainerView, workoutImageView, nameLabel, exercisesLabel)
+        contentView.addSubViews(workoutImageView, nameLabel, exercisesLabel)
         addConstraints()
     }
     
@@ -60,17 +52,12 @@ final class BBCustomWorkoutPlanListViewCell: UICollectionViewCell {
     
     private func addConstraints() {
         NSLayoutConstraint.activate([
-            imageContainerView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 7),
-            imageContainerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 7),
-            imageContainerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -7),
-            imageContainerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -80),
+            workoutImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 7),
+            workoutImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 7),
+            workoutImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -7),
+            workoutImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -80),
             
-            workoutImageView.centerXAnchor.constraint(equalTo: imageContainerView.centerXAnchor),
-            workoutImageView.centerYAnchor.constraint(equalTo: imageContainerView.centerYAnchor),
-            workoutImageView.heightAnchor.constraint(equalToConstant: 80),
-            workoutImageView.widthAnchor.constraint(equalToConstant: 100),
-            
-            nameLabel.topAnchor.constraint(equalTo: imageContainerView.bottomAnchor, constant: 10),
+            nameLabel.topAnchor.constraint(equalTo: workoutImageView.bottomAnchor, constant: 10),
             nameLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 7),
             nameLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -7),
             nameLabel.heightAnchor.constraint(equalToConstant: 30),
@@ -89,16 +76,5 @@ final class BBCustomWorkoutPlanListViewCell: UICollectionViewCell {
     public func configure(with viewModel: BBWorkoutPlanListViewCellViewModel) {
         nameLabel.text = viewModel.title
         exercisesLabel.text = "\(viewModel.numberOfWorkouts) exercises"
-//        viewModel.fetchImage { [weak self] result in
-//            switch result {
-//            case .success(let data):
-//                let image = UIImage(data: data)
-//                DispatchQueue.main.async {
-//                    self?.workoutImageView.image = image
-//                }
-//            case .failure(let error):
-//                print(String(describing: error))
-//            }
-//        }
     }
 }

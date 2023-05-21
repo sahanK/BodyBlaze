@@ -5,6 +5,7 @@
 //  Created by Sahan Walpita on 2023-05-11.
 //
 
+import youtube_ios_player_helper
 import UIKit
 
 protocol BBWorkoutPlanPlayViewDelegate: AnyObject {
@@ -31,14 +32,12 @@ final class BBWorkoutPlanPlayView: UIView {
         return view
     }()
     
-    private let workoutImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.contentMode = .scaleToFill
-        imageView.layer.cornerRadius = 10
-        imageView.layer.masksToBounds = true
-        imageView.image = UIImage(named: "recommended-bg-1")
-        return imageView
+    private let workoutVideoView: YTPlayerView = {
+        let playerView = YTPlayerView()
+        playerView.translatesAutoresizingMaskIntoConstraints = false
+        playerView.layer.cornerRadius = 10
+        playerView.backgroundColor = UIColor(named: "GrayScale-80")
+        return playerView
     }()
     
     private let nameLabel: UILabel = {
@@ -166,7 +165,7 @@ final class BBWorkoutPlanPlayView: UIView {
             nextWorkoutRepsLabel
         )
         contentView.addSubViews(
-            workoutImageView,
+            workoutVideoView,
             nameLabel,
             repsLabel,
             finishButton,
@@ -208,12 +207,12 @@ final class BBWorkoutPlanPlayView: UIView {
             contentView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
             contentView.heightAnchor.constraint(equalToConstant: 800),
             
-            workoutImageView.topAnchor.constraint(equalTo: contentView.topAnchor),
-            workoutImageView.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 10),
-            workoutImageView.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -10),
-            workoutImageView.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height * 0.4),
+            workoutVideoView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            workoutVideoView.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 10),
+            workoutVideoView.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -10),
+            workoutVideoView.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height * 0.4),
             
-            nameLabel.topAnchor.constraint(equalTo: workoutImageView.bottomAnchor, constant: 10),
+            nameLabel.topAnchor.constraint(equalTo: workoutVideoView.bottomAnchor, constant: 10),
             nameLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 10),
             nameLabel.heightAnchor.constraint(equalToConstant: 20),
             
@@ -261,21 +260,24 @@ final class BBWorkoutPlanPlayView: UIView {
     }
     
     private func configure(viewModel: BBWorkoutPlanPlayViewViewModel) {
+        let currentWorkout = viewModel.workoutPlan.workouts[viewModel.currentWorkout]
         if viewModel.currentWorkout < viewModel.workoutPlan.workouts.count {
-            nameLabel.text = viewModel.workoutPlan.workouts[viewModel.currentWorkout].name
-            repsLabel.text = "x\(viewModel.workoutPlan.workouts[viewModel.currentWorkout].reps)"
+            nameLabel.text = currentWorkout.name
+            repsLabel.text = "x\(currentWorkout.reps)"
+            print(currentWorkout.video)
+            print(getYouTubeIdFromUrl(url: currentWorkout.video))
+            UIView.animate(withDuration: 0.4) {
+                self.workoutVideoView.alpha = 0
+                self.workoutVideoView.isHidden = true
+            }
             
-            viewModel.fetchImage(
-                url: viewModel.workoutPlan.workouts[viewModel.currentWorkout].image
-            ) { [weak self] result in
-                switch result {
-                case .success(let data):
-                    let image = UIImage(data: data)
-                    DispatchQueue.main.async {
-                        self?.workoutImageView.image = image
+            workoutVideoView.load(withVideoId: getYouTubeIdFromUrl(url: currentWorkout.video))
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                DispatchQueue.main.async {
+                    UIView.animate(withDuration: 0.4) {
+                        self.workoutVideoView.isHidden = false
+                        self.workoutVideoView.alpha = 1
                     }
-                case .failure(let error):
-                    print(String(describing: error))
                 }
             }
         }

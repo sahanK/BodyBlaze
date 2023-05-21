@@ -32,6 +32,7 @@ final class BBPhysiqueViewController: UIViewController, BBPhysiqueViewDelegate {
         let homeVC = BBTabBarController()
         homeVC.navigationItem.largeTitleDisplayMode = .never
         UserDefaults.standard.set(true, forKey: "onBoardongDone")
+        self.navigationController?.navigationBar.isHidden = true
         self.navigationController?.setViewControllers([homeVC], animated: true)
     }
     

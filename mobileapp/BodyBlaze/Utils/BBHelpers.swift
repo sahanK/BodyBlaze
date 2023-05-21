@@ -28,3 +28,10 @@ func getBmiLevel(bmiValue: Double) -> BBBMI {
     }
     return .Normal
 }
+
+func getYouTubeIdFromUrl(url: String) -> String {
+    guard let urlComponents = URLComponents(string: url) else { return "" }
+    guard let id = urlComponents.queryItems?.first(where: { $0.name == "v" }) else { return "" }
+    guard let value = id.value else { return "" }
+    return value
+}

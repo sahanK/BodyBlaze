@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		43DD9B7A7DF87F8BBC8F60CD /* Pods_BodyBlaze.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A03A6144160000AF4BB9A4A /* Pods_BodyBlaze.framework */; };
 		E801EFE12A19EE1600300562 /* BBService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E801EFE02A19EE1600300562 /* BBService.swift */; };
 		E801EFE32A19EE3F00300562 /* BBRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E801EFE22A19EE3F00300562 /* BBRequest.swift */; };
 		E801EFE52A19EE5B00300562 /* BBEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = E801EFE42A19EE5B00300562 /* BBEndpoint.swift */; };
@@ -67,6 +68,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2031E5E2E6BD4F7EB3CBDB83 /* Pods-BodyBlaze.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BodyBlaze.release.xcconfig"; path = "Target Support Files/Pods-BodyBlaze/Pods-BodyBlaze.release.xcconfig"; sourceTree = "<group>"; };
+		6027E614DAC4C11E43F55FD3 /* Pods-BodyBlaze.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BodyBlaze.debug.xcconfig"; path = "Target Support Files/Pods-BodyBlaze/Pods-BodyBlaze.debug.xcconfig"; sourceTree = "<group>"; };
+		8A03A6144160000AF4BB9A4A /* Pods_BodyBlaze.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BodyBlaze.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E801EFE02A19EE1600300562 /* BBService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBService.swift; sourceTree = "<group>"; };
 		E801EFE22A19EE3F00300562 /* BBRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBRequest.swift; sourceTree = "<group>"; };
 		E801EFE42A19EE5B00300562 /* BBEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBEndpoint.swift; sourceTree = "<group>"; };
@@ -133,12 +137,31 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				43DD9B7A7DF87F8BBC8F60CD /* Pods_BodyBlaze.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1C8773104447F1AD07BF1923 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8A03A6144160000AF4BB9A4A /* Pods_BodyBlaze.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		7E119F9DCC937B40FB0EA3C8 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				6027E614DAC4C11E43F55FD3 /* Pods-BodyBlaze.debug.xcconfig */,
+				2031E5E2E6BD4F7EB3CBDB83 /* Pods-BodyBlaze.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		E801EFDF2A19EDFB00300562 /* APIClient */ = {
 			isa = PBXGroup;
 			children = (
@@ -185,6 +208,8 @@
 			children = (
 				E81E35F129EDBC93007514B9 /* BodyBlaze */,
 				E81E35F029EDBC93007514B9 /* Products */,
+				7E119F9DCC937B40FB0EA3C8 /* Pods */,
+				1C8773104447F1AD07BF1923 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -435,9 +460,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E81E360329EDBC94007514B9 /* Build configuration list for PBXNativeTarget "BodyBlaze" */;
 			buildPhases = (
+				A21C72CDA3307DCD57F1AF8A /* [CP] Check Pods Manifest.lock */,
 				E81E35EB29EDBC93007514B9 /* Sources */,
 				E81E35EC29EDBC93007514B9 /* Frameworks */,
 				E81E35ED29EDBC93007514B9 /* Resources */,
+				1E58DCDDDC6E320D8548EAAC /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -492,6 +519,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1E58DCDDDC6E320D8548EAAC /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BodyBlaze/Pods-BodyBlaze-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BodyBlaze/Pods-BodyBlaze-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BodyBlaze/Pods-BodyBlaze-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A21C72CDA3307DCD57F1AF8A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-BodyBlaze-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		E81E35EB29EDBC93007514B9 /* Sources */ = {
@@ -686,6 +755,7 @@
 		};
 		E81E360429EDBC94007514B9 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6027E614DAC4C11E43F55FD3 /* Pods-BodyBlaze.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -717,6 +787,7 @@
 		};
 		E81E360529EDBC94007514B9 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2031E5E2E6BD4F7EB3CBDB83 /* Pods-BodyBlaze.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

@@ -39,7 +39,6 @@ final class BBWorkoutPlanListViewViewModel: NSObject {
             expecting: BBGetAllWorkoutPlansResponse.self) { [weak self] result in
                 switch result {
                 case .success(let response):
-                    print(response.data)
                     self?.workoutPlans = response.data
                     DispatchQueue.main.async {
                         self?.delegate?.didLoadWorkoutPlans()
