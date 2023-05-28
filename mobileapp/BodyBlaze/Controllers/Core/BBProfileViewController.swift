@@ -12,6 +12,8 @@ final class BBProfileViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.navigationBar.prefersLargeTitles = true
+        title = "Health Assessment"
         view.addSubview(profileView)
         addConstraints()
     }

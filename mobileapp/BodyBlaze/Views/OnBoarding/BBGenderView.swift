@@ -9,6 +9,7 @@ import UIKit
 
 protocol BBGenderViewDelegate: AnyObject {
     func gotoPhysiqueView()
+    func displayAlert(_ message: String)
 }
 
 final class BBGenderView: UIView {
@@ -88,12 +89,15 @@ final class BBGenderView: UIView {
     
     @objc
     private func nextButtonAction() {
+        guard viewModel.selectedGender != nil else {
+            delegate?.displayAlert("Please select your gender")
+            return
+        }
         delegate?.gotoPhysiqueView()
     }
     
     @objc
     private func genderMaleAction(_ sender: UITapGestureRecognizer) {
-        print("THIS")
         viewModel.selectGender(gender: .Male)
         genderMaleImage.backgroundColor = UIColor(named: "GrayScale-60")
         genderFemaleImage.backgroundColor = UIColor(named: "GrayScale-80")

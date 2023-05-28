@@ -10,14 +10,6 @@ import UIKit
 final class BBProfileView: UIView {
     private let viewModel = BBProfileViewViewModel()
     
-    private let titleLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Your Health Assessment"
-        label.font = .systemFont(ofSize: 24, weight: .bold)
-        return label
-    }()
-    
     private let subTitleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -129,7 +121,6 @@ final class BBProfileView: UIView {
         translatesAutoresizingMaskIntoConstraints = false
         
         addSubViews(
-            titleLabel,
             subTitleLabel,
             heightContainer,
             weightContainer,
@@ -154,12 +145,7 @@ final class BBProfileView: UIView {
     
     private func addConstraints() {
         NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: topAnchor),
-            titleLabel.leftAnchor.constraint(equalTo: leftAnchor),
-            titleLabel.heightAnchor.constraint(equalToConstant: 60),
-            titleLabel.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width * 0.75),
-            
-            subTitleLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10),
+            subTitleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 10),
             subTitleLabel.leftAnchor.constraint(equalTo: leftAnchor),
             subTitleLabel.heightAnchor.constraint(equalToConstant: 40),
             subTitleLabel.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width * 0.75),

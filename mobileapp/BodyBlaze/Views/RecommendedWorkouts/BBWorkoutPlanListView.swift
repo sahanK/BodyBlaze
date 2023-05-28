@@ -26,30 +26,6 @@ final class BBWorkoutPlanListView: UIView {
         return spinner
     }()
     
-    private let containerVStack: UIStackView = {
-        let stackView = UIStackView()
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.axis = .vertical
-        stackView.spacing = 10
-        return stackView
-    }()
-    
-    private let titleHStack: UIStackView = {
-        let stackView = UIStackView()
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.axis = .horizontal
-        stackView.distribution = .equalSpacing
-        return stackView
-    }()
-    
-    private let recommendedWorkoutsLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Workout plans"
-        label.font = .systemFont(ofSize: 20, weight: .medium)
-        return label
-    }()
-    
     private let tableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -69,10 +45,10 @@ final class BBWorkoutPlanListView: UIView {
         super.init(frame: frame)
         translatesAutoresizingMaskIntoConstraints = false
         
-        setupSubViews()
-        addSubViews(containerVStack)
+        addSubViews(tableView, spinner)
         addConstraints()
         viewModel.delegate = self
+        spinner.startAnimating()
         viewModel.fetchWorkoutPlans()
         setupTableView()
     }
@@ -86,34 +62,18 @@ final class BBWorkoutPlanListView: UIView {
         tableView.delegate = viewModel
     }
     
-    private func setupSubViews() {
-        titleHStack.addArrangedSubview(recommendedWorkoutsLabel)
-        containerVStack.addArrangedSubview(titleHStack)
-        containerVStack.addArrangedSubview(tableView)
-        containerVStack.addArrangedSubview(spinner)
-        spinner.startAnimating()
-    }
-    
     private func addConstraints() {
         NSLayoutConstraint.activate([
-            containerVStack.topAnchor.constraint(equalTo: topAnchor),
-            containerVStack.leadingAnchor.constraint(equalTo: leadingAnchor),
-            containerVStack.trailingAnchor.constraint(equalTo: trailingAnchor),
-            containerVStack.bottomAnchor.constraint(equalTo: bottomAnchor),
+            tableView.topAnchor.constraint(equalTo: topAnchor),
+            tableView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            tableView.bottomAnchor.constraint(equalTo: bottomAnchor),
             
-            titleHStack.topAnchor.constraint(equalTo: containerVStack.topAnchor),
-            titleHStack.leadingAnchor.constraint(equalTo: containerVStack.leadingAnchor),
-            titleHStack.trailingAnchor.constraint(equalTo: containerVStack.trailingAnchor),
-            
-            tableView.leadingAnchor.constraint(equalTo: containerVStack.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: containerVStack.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: containerVStack.bottomAnchor),
-            
-            spinner.topAnchor.constraint(equalTo: containerVStack.topAnchor),
+            spinner.topAnchor.constraint(equalTo: tableView.topAnchor),
             spinner.heightAnchor.constraint(equalToConstant: 100),
             spinner.widthAnchor.constraint(equalToConstant: 100),
-            spinner.centerXAnchor.constraint(equalTo: containerVStack.centerXAnchor),
-            spinner.centerYAnchor.constraint(equalTo: containerVStack.centerYAnchor)
+            spinner.centerXAnchor.constraint(equalTo: tableView.centerXAnchor),
+            spinner.centerYAnchor.constraint(equalTo: tableView.centerYAnchor)
         ])
     }
 }

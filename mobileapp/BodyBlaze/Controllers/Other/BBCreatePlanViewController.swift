@@ -39,4 +39,11 @@ final class BBCreatePlanViewController: UIViewController, BBCreateWorkoutPlanVie
     func goBack() {
         navigationController?.popViewController(animated: true)
     }
+    
+    func displayAlert(_ message: String) {
+        let alertController = UIAlertController(title: message, message: nil, preferredStyle: .alert)
+        let okayAction = UIAlertAction(title: "Okay", style: .default)
+        alertController.addAction(okayAction)
+        present(alertController, animated: true)
+    }
 }

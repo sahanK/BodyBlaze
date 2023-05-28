@@ -17,34 +17,17 @@ final class BBCustomWorkoutPlanListView: UIView {
     
     private let viewModel = BBCustomWorkoutPlanListViewViewModel.shared
     
-    private let containerVStack: UIStackView = {
-        let stack = UIStackView()
-        stack.translatesAutoresizingMaskIntoConstraints = false
-        stack.axis = .vertical
-        stack.spacing = 10
-        return stack
-    }()
-    
-    private let yourPlansLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Your plans"
-        label.font = .systemFont(ofSize: 20, weight: .medium)
-        return label
-    }()
-    
-    private let collectionView: UICollectionView = {
-        let collectionViewLayout = UICollectionViewFlowLayout()
-        collectionViewLayout.scrollDirection = .horizontal
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout)
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.register(
+    private let tableView: UITableView = {
+        let tableView = UITableView()
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.register(
             BBCustomWorkoutPlanListViewCell.self,
-            forCellWithReuseIdentifier: BBCustomWorkoutPlanListViewCell.identifier
+            forCellReuseIdentifier: BBCustomWorkoutPlanListViewCell.identifier
         )
-        collectionView.showsHorizontalScrollIndicator = false
-        collectionView.backgroundColor = UIColor(named: "GrayScale-100")
-        return collectionView
+        tableView.showsVerticalScrollIndicator = false
+        tableView.separatorStyle = .none
+        tableView.backgroundColor = UIColor(named: "GrayScale-100")
+        return tableView
     }()
     
     private let addNewWorkoutsContainer: UIView = {
@@ -73,29 +56,19 @@ final class BBCustomWorkoutPlanListView: UIView {
         return button
     }()
     
-    private let addNewWorkoutsButtonSecondary: UIButton = {
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("CREATE", for: .normal)
-        button.contentHorizontalAlignment = .trailing
-        button.setTitleColor(UIColor(named: "Primary"), for: .normal)
-        return button
-    }()
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         translatesAutoresizingMaskIntoConstraints = false
         backgroundColor =  UIColor(named: "GrayScale-100")
         
         setupSubViews()
-        addSubViews(containerVStack)
+        addSubViews(tableView, addNewWorkoutsContainer)
         addConstraints()
         viewModel.delegate = self
         viewModel.fetchWorkoutPlans()
         setupCollectionView()
         
         addNewWorkoutsButton.addTarget(self, action: #selector(createButtonAction), for: .touchUpInside)
-        addNewWorkoutsButtonSecondary.addTarget(self, action: #selector(createButtonAction), for: .touchUpInside)
     }
     
     required init?(coder: NSCoder) {
@@ -108,43 +81,26 @@ final class BBCustomWorkoutPlanListView: UIView {
     }
     
     private func setupCollectionView() {
-        collectionView.dataSource = viewModel
-        collectionView.delegate = viewModel
+        tableView.dataSource = viewModel
+        tableView.delegate = viewModel
     }
     
     private func setupSubViews() {
-        containerVStack.addArrangedSubview(yourPlansLabel)
-        containerVStack.addArrangedSubview(addNewWorkoutsButtonSecondary)
-        containerVStack.addArrangedSubview(collectionView)
-        containerVStack.addArrangedSubview(addNewWorkoutsContainer)
         addNewWorkoutsContainer.addSubview(addNewWorkoutsButton)
         addNewWorkoutsContainer.addSubview(emptyListLabel)
     }
     
     private func addConstraints() {
         NSLayoutConstraint.activate([
-            containerVStack.topAnchor.constraint(equalTo: topAnchor),
-            containerVStack.leadingAnchor.constraint(equalTo: leadingAnchor),
-            containerVStack.trailingAnchor.constraint(equalTo: trailingAnchor),
-            containerVStack.bottomAnchor.constraint(equalTo: bottomAnchor),
+            tableView.topAnchor.constraint(equalTo: topAnchor),
+            tableView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            tableView.bottomAnchor.constraint(equalTo: bottomAnchor),
             
-            yourPlansLabel.topAnchor.constraint(equalTo: containerVStack.topAnchor),
-            yourPlansLabel.leadingAnchor.constraint(equalTo: containerVStack.leadingAnchor),
-            yourPlansLabel.heightAnchor.constraint(equalToConstant: 20),
-            
-            addNewWorkoutsButtonSecondary.topAnchor.constraint(equalTo: containerVStack.topAnchor),
-            addNewWorkoutsButtonSecondary.rightAnchor.constraint(equalTo: rightAnchor),
-            addNewWorkoutsButtonSecondary.heightAnchor.constraint(equalToConstant: 20),
-            
-            collectionView.leadingAnchor.constraint(equalTo: containerVStack.leadingAnchor),
-            collectionView.trailingAnchor.constraint(equalTo: containerVStack.trailingAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: containerVStack.bottomAnchor),
-            collectionView.heightAnchor.constraint(equalToConstant: 350),
-            
-            addNewWorkoutsContainer.topAnchor.constraint(equalTo: yourPlansLabel.bottomAnchor, constant: 10),
-            addNewWorkoutsContainer.bottomAnchor.constraint(equalTo: containerVStack.bottomAnchor),
-            addNewWorkoutsContainer.leftAnchor.constraint(equalTo: containerVStack.leftAnchor),
-            addNewWorkoutsContainer.rightAnchor.constraint(equalTo: containerVStack.rightAnchor),
+            addNewWorkoutsContainer.topAnchor.constraint(equalTo: topAnchor, constant: 10),
+            addNewWorkoutsContainer.leftAnchor.constraint(equalTo: leftAnchor),
+            addNewWorkoutsContainer.rightAnchor.constraint(equalTo: rightAnchor),
+            addNewWorkoutsContainer.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height * 0.4),
             
             emptyListLabel.centerXAnchor.constraint(equalTo: addNewWorkoutsContainer.centerXAnchor),
             emptyListLabel.centerYAnchor.constraint(equalTo: addNewWorkoutsContainer.centerYAnchor, constant: -25),
@@ -160,19 +116,16 @@ final class BBCustomWorkoutPlanListView: UIView {
 
 extension BBCustomWorkoutPlanListView: BBCustomWorkoutPlanListViewViewModelDelegate {
     func newWorkoutCreated() {
-        collectionView.reloadData()
+        tableView.reloadData()
         addNewWorkoutsContainer.isHidden = true
-        addNewWorkoutsButtonSecondary.isHidden = false
     }
     
     func displayInitialView(isEmptyList: Bool) {
         if isEmptyList {
             addNewWorkoutsContainer.isHidden = false
-            addNewWorkoutsButtonSecondary.isHidden = true
             return
         }
         addNewWorkoutsContainer.isHidden = true
-        addNewWorkoutsButtonSecondary.isHidden = false
     }
     
     func didSelectWorkoutPlan(_ workoutPlan: BBWorkoutPlan) {

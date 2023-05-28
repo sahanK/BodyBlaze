@@ -56,14 +56,14 @@ final class BBCustomWorkoutPlanListViewViewModel: NSObject {
     }
 }
 
-extension BBCustomWorkoutPlanListViewViewModel: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+extension BBCustomWorkoutPlanListViewViewModel: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return workoutPlanCellViewModels.count
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: BBCustomWorkoutPlanListViewCell.identifier,
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(
+            withIdentifier: BBCustomWorkoutPlanListViewCell.identifier,
             for: indexPath
         ) as? BBCustomWorkoutPlanListViewCell else {
             fatalError("Unsupported cell")
@@ -73,14 +73,12 @@ extension BBCustomWorkoutPlanListViewViewModel: UICollectionViewDelegate, UIColl
         return cell
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let bounds = UIScreen.main.bounds
-        let width = bounds.width * 0.8
-        return CGSize(width: width, height: width * 0.9)
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 220
     }
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        collectionView.deselectItem(at: indexPath, animated: true)
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         let workoutPlan = workoutPlans[indexPath.row]
         delegate?.didSelectWorkoutPlan(workoutPlan)
     }

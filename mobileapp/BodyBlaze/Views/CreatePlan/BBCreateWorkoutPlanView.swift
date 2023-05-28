@@ -10,6 +10,7 @@ import UIKit
 protocol BBCreateWorkoutPlanViewDelegate {
     func displayWorkoutsList()
     func goBack()
+    func displayAlert(_ message: String)
 }
 
 final class BBCreateWorkoutPlanView: UIView {
@@ -187,6 +188,10 @@ final class BBCreateWorkoutPlanView: UIView {
     @objc
     private func saveButtonAction() {
         guard let name = nameTextInput.text else { return }
+        guard viewModel.selectedWorkouts.count > 0 else {
+            delegate?.displayAlert("Please add some exercises for your plan")
+            return
+        }
         viewModel.createPlan(name: name)
         delegate?.goBack()
     }

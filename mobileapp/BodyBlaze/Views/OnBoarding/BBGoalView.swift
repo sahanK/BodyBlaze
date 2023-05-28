@@ -9,6 +9,7 @@ import UIKit
 
 protocol BBGoalViewDelegate: AnyObject {
     func goToGenderView()
+    func displayAlert(_ message: String)
 }
 
 final class BBGoalView: UIView {
@@ -46,7 +47,7 @@ final class BBGoalView: UIView {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Muscle Gain", for: .normal)
-        button.backgroundColor = UIColor(named: "GrayScale-60")
+        button.backgroundColor = UIColor(named: "GrayScale-80")
         button.layer.cornerRadius = 10
         return button
     }()
@@ -80,6 +81,10 @@ final class BBGoalView: UIView {
     
     @objc
     private func nextButtonAction() {
+        guard viewModel.selectedGoal != nil else {
+            delegate?.displayAlert("Please select your goal")
+            return
+        }
         delegate?.goToGenderView()
     }
     
