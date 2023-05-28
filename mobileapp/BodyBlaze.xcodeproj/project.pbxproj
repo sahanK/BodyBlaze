@@ -771,6 +771,7 @@
 				DEVELOPMENT_TEAM = PA48R7V35J;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BodyBlaze/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Body Blaze";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleDarkContent;
@@ -803,6 +804,7 @@
 				DEVELOPMENT_TEAM = PA48R7V35J;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BodyBlaze/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Body Blaze";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleDarkContent;
